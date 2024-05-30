@@ -108,7 +108,7 @@ def iqindportero(df, j1):
 st.title('Análisis de Porteras')
 
 # URL del archivo CSV en GitHub
-file_url = 'https://raw.githubusercontent.com/tu_usuario/tu_repositorio/main/porteros.csv'
+file_url = 'https://raw.githubusercontent.com/cbkatiaa/app/main/porteros.csv'
 
 # Leer el archivo CSV desde GitHub
 df = pd.read_csv(file_url)
