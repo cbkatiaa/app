@@ -5,9 +5,6 @@ Created on Thu May 30 10:36:22 2024
 @author: katia
 """
 
-pip install matplotlib
-pip install pandas
-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
