@@ -103,74 +103,15 @@ def iqindportero(df, j1):
     ax7.axis('off')
 
     return fig
-
-# Streamlit app
+# Interfaz de usuario de Streamlit
 st.title('Análisis de Porteros')
+uploaded_file = st.file_uploader("Sube el archivo CSV", type=["csv"])
 
-# URL del archivo CSV en GitHub
-file_url = 'https://raw.githubusercontent.com/cbkatiaa/app/main/porteros.csv'
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    jugadores = df['Name'].unique()
+    jugador_seleccionado = st.selectbox("Selecciona el portero", jugadores)
 
-# Leer el archivo CSV desde GitHub
-df = pd.read_csv(file_url)
-
-# Seleccionar temporada, posición y nombre de portera
-temporadas = df['Season'].unique()
-posiciones = df['Primary Position'].unique()
-
-temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas, key='temporada')
-posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones, key='posicion')
-
-df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
-porteras = df_filtrado['Name'].unique()
-portera_seleccionada = st.selectbox("Seleccione al portero", porteras, key='portero')
-
-if st.button("Generar Análisis", key='boton_analisis'):
-    fig = iqindportero(df_filtrado, portera_seleccionada)
-    st.pyplot(fig)
-# Streamlit app
-st.title('Análisis de Porteros')
-
-# URL del archivo CSV en GitHub
-file_url = 'https://raw.githubusercontent.com/cbkatiaa/app/main/porteros.csv'
-
-# Leer el archivo CSV desde GitHub
-df = pd.read_csv(file_url)
-
-# Seleccionar temporada, posición y nombre de portera
-temporadas = df['Season'].unique()
-posiciones = df['Primary Position'].unique()
-
-temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
-posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
-
-df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
-porteras = df_filtrado['Name'].unique()
-portera_seleccionada = st.selectbox("Seleccione al portero", porteras)
-
-if st.button("Generar Análisis"):
-    fig = iqindportero(df_filtrado, portera_seleccionada)
-    st.pyplot(fig)
-
-# Streamlit app
-st.title('Análisis de Porteros')
-
-# URL del archivo CSV en GitHub
-file_url = 'https://raw.githubusercontent.com/cbkatiaa/app/main/porteros.csv'
-
-# Leer el archivo CSV desde GitHub
-df = pd.read_csv(file_url)
-
-# Seleccionar temporada, posición y nombre de portera
-temporadas = df['Season'].unique()
-posiciones = df['Primary Position'].unique()
-
-temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
-posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
-
-df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
-porteras = df_filtrado['Name'].unique()
-portera_seleccionada = st.selectbox("Seleccione al portero", porteras)
-
-if st.button("Generar Análisis"):
-    fig = iqindportero(df_filtrado, portera_seleccionada)
-    st.pyplot(fig)
+    if st.button("Generar Análisis"):
+        fig = iqindportero(df, jugador_seleccionado)
+        st.pyplot(fig)
