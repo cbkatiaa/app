@@ -126,16 +126,3 @@ portera_seleccionada = st.selectbox("Seleccione al portero", porteras)
 if st.button("Generar Análisis"):
     fig = iqindportero(df_filtrado, portera_seleccionada)
     st.pyplot(fig)
-
-# Interfaz de usuario de Streamlit
-st.title('Análisis de Porteros')
-uploaded_file = st.file_uploader("Sube el archivo CSV", type=["csv"])
-
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    jugadores = df['Name'].unique()
-    jugador_seleccionado = st.selectbox("Selecciona el portero", jugadores)
-
-    if st.button("Generar Análisis"):
-        fig = iqindportero(df, jugador_seleccionado)
-        st.pyplot(fig)
