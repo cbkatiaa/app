@@ -12,6 +12,7 @@ from matplotlib import lines
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib as mp
 
+# Define the function iqindportero
 def iqindportero(df, j1):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
@@ -80,8 +81,7 @@ def iqindportero(df, j1):
         normmax = 1
         data_color = [(x - normmin) / (normmax - normmin) for x in data_color]
         cmap = LinearSegmentedColormap.from_list('rg', ["darkred", "red", "salmon", "yellowgreen", "green", "darkgreen"], N=256)
-        cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
-        colors = cmap(data_color) if title != 'Pases hacia peligro %' else cmap_invertida(data_color)
+        colors = cmap(data_color)
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
         for c in ax.containers:
             labels = [(y * 100).astype(int) if y > .05 else "" for y in c.datavalues]
@@ -103,6 +103,7 @@ def iqindportero(df, j1):
     ax7.axis('off')
 
     return fig
+
 # Interfaz de usuario de Streamlit
 st.title('Análisis de Porteros')
 uploaded_file = st.file_uploader("Sube el archivo CSV", type=["csv"])
