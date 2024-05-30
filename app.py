@@ -119,7 +119,7 @@ ax7.axis('off')
 plt.show()
 
 # Streamlit app
-st.title('Análisis de Porteras')
+st.title('Análisis de Porteros')
 
 # URL del archivo CSV en GitHub
 file_url = 'https://raw.githubusercontent.com/cbkatiaa/app/main/porteros.csv'
