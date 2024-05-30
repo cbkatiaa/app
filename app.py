@@ -107,11 +107,11 @@ def iqindportero(df, j1):
 # Streamlit app
 st.title('Análisis de Porteras')
 
-file_path = "C:/Users/katia/Downloads/porteros.csv"
-df = pd.read_csv(file_path)
+# URL del archivo CSV en GitHub
+file_url = 'https://raw.githubusercontent.com/tu_usuario/tu_repositorio/main/porteros.csv'
 
-# Streamlit app
-st.title('Análisis de Porteras')
+# Leer el archivo CSV desde GitHub
+df = pd.read_csv(file_url)
 
 # Seleccionar temporada, posición y nombre de portera
 temporadas = df['Season'].unique()
