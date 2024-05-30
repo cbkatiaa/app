@@ -12,7 +12,6 @@ from matplotlib import lines
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib as mp
 
-# Define the function iqindportero
 def iqindportero(df, j1):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
@@ -103,6 +102,30 @@ def iqindportero(df, j1):
     ax7.axis('off')
 
     return fig
+
+# Streamlit app
+st.title('Análisis de Porteros')
+
+# URL del archivo CSV en GitHub
+file_url = 'https://raw.githubusercontent.com/cbkatiaa/app/main/porteros.csv'
+
+# Leer el archivo CSV desde GitHub
+df = pd.read_csv(file_url)
+
+# Seleccionar temporada, posición y nombre de portera
+temporadas = df['Season'].unique()
+posiciones = df['Primary Position'].unique()
+
+temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
+posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
+
+df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
+porteras = df_filtrado['Name'].unique()
+portera_seleccionada = st.selectbox("Seleccione al portero", porteras)
+
+if st.button("Generar Análisis"):
+    fig = iqindportero(df_filtrado, portera_seleccionada)
+    st.pyplot(fig)
 
 # Interfaz de usuario de Streamlit
 st.title('Análisis de Porteros')
