@@ -4,7 +4,7 @@ Created on Thu May 30 10:36:22 2024
 
 @author: katia
 """
-pip install streamlit
+
 pip install matplotlib
 pip install pandas
 
