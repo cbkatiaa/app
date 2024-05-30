@@ -12,59 +12,6 @@ from matplotlib import lines
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib as mp
 
-# Define the function iqindportero
-def iqindportero(df, j1):
-    c = 'white'
-    fig = plt.figure(frameon=False, edgecolor='#293A4A')
-    fig.set_figheight(18)
-    fig.set_figwidth(31)
-    sh = 16
-    ax0 = plt.subplot2grid(shape=(sh, 7), loc=(0, 0), colspan=4, rowspan=3)
-    ax1 = plt.subplot2grid(shape=(sh, 7), loc=(3, 0), colspan=4, rowspan=5)
-    ax2 = plt.subplot2grid(shape=(sh, 7), loc=(8, 0), colspan=4, rowspan=8)
-    ax6 = plt.subplot2grid(shape=(sh, 7), loc=(0, 4), colspan=3, rowspan=7)
-    ax7 = plt.subplot2grid(shape=(sh, 7), loc=(9, 4), colspan=3, rowspan=7)
-    fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.05, hspace=0.3)
-
-    bar1 = ['Goles parados', 'Calidad de posicionamiento', 'Salidas de portero (centros)', 'Salidas de libero del portero']
-    bar2 = ['Pases', '% pases con zurdo', 'Éxito pases', '% pases son largos', 'Éxito pases largos', 'Éxito pases bajo presión', 'Pases hacia peligro %']
-
-    ti1 = 'Acciones del portero'
-    ti2 = 'Posesión'
-    ti6 = 'Tiros en contra'
-    ti7 = 'Penales en contra'
-
-    c1 = 'white'
-    txs = 22
-    padr = -45
-
-    fig.add_artist(lines.Line2D([.57, .57], [1, 0.1], color='#293A4A', lw=5))
-    fig.add_artist(lines.Line2D([-.04, .57], [.76, 0.76], color='#293A4A', lw=5))
-    fig.add_artist(lines.Line2D([.57, .91], [.5, 0.5], color='#293A4A', lw=5))
-
-    plt.rcParams["font.family"] = "Century Gothic"
-
-    df['Long balls total'] = (df['Long Balls'] / df['Long Ball%']) * 100
-    df['Long balls per pass'] = df['Long balls total'] / df['OP Passes']
-    df['% pases son largos'] = df['Long balls per pass'].rank(pct=True)
-    df['Goles parados'] = df['GSAA'].rank(pct=True)
-    df['OBV portero'] = df['Goalkeeper OBV'].rank(pct=True)
-    df['Salidas de libero del portero'] = df['GK Aggressive Dist.'].rank(pct=True)
-    df['Salidas de portero (centros)'] = df['Claims%'].rank(pct=True)
-    df['Pases hacia peligro %'] = df['Pass into Danger%'].rank(pct=True)
-    df['Calidad de posicionamiento'] = 1 - (df['Positioning Error'].rank(pct=True))
-    df['Pases'] = df['OP Passes'].rank(pct=True)
-    df['Éxito pases largos'] = df['Long Ball%'].rank(pct=True)
-    df['Éxito pases'] = df['Passing%'].rank(pct=True)
-    df['Éxito pases bajo presión'] = df['Pr. Pass%'].rank(pct=True)
-    df['% pases con zurdo'] = df['L/R Footedness%'] / 100
-
-    df = df.loc[df['Name'] == j1]
-    df = df.set_index('Name')
-    df = df.transpose()
-
-    ax0.axis('off')
-
 def iqindportero(df, j1):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
@@ -157,6 +104,29 @@ def iqindportero(df, j1):
 
     return fig
 
+# Streamlit app
+st.title('Análisis de Porteros')
+
+# URL del archivo CSV en GitHub
+file_url = 'https://raw.githubusercontent.com/cbkatiaa/app/main/porteros.csv'
+
+# Leer el archivo CSV desde GitHub
+df = pd.read_csv(file_url)
+
+# Seleccionar temporada, posición y nombre de portera
+temporadas = df['Season'].unique()
+posiciones = df['Primary Position'].unique()
+
+temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas, key='temporada')
+posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones, key='posicion')
+
+df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
+porteras = df_filtrado['Name'].unique()
+portera_seleccionada = st.selectbox("Seleccione al portero", porteras, key='portero')
+
+if st.button("Generar Análisis", key='boton_analisis'):
+    fig = iqindportero(df_filtrado, portera_seleccionada)
+    st.pyplot(fig)
 # Streamlit app
 st.title('Análisis de Porteros')
 
