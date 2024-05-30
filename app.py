@@ -97,6 +97,17 @@ def plot_bar(ax, bar_data, title):
     ax.set_xticks([0.5])
     ax.grid(color='grey', axis='x', which='major')
 
+fig = plt.figure(frameon=False, edgecolor='#293A4A')
+fig.set_figheight(18)
+fig.set_figwidth(31)
+sh = 16
+ax0 = plt.subplot2grid(shape=(sh, 7), loc=(0, 0), colspan=4, rowspan=3)
+ax1 = plt.subplot2grid(shape=(sh, 7), loc=(3, 0), colspan=4, rowspan=5)
+ax2 = plt.subplot2grid(shape=(sh, 7), loc=(8, 0), colspan=4, rowspan=8)
+ax6 = plt.subplot2grid(shape=(sh, 7), loc=(0, 4), colspan=3, rowspan=7)
+ax7 = plt.subplot2grid(shape=(sh, 7), loc=(9, 4), colspan=3, rowspan=7)
+fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.05, hspace=0.3)
+
 plot_bar(ax1, bar1, ti1)
 plot_bar(ax2, bar2, ti2)
 
@@ -105,7 +116,7 @@ ax6.axis('off')
 ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
 ax7.axis('off')
 
-return fig
+plt.show()
 
 # Streamlit app
 st.title('Análisis de Porteras')
