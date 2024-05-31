@@ -94,15 +94,15 @@ def plot_bar(ax, bar_data, title):
     ax.set_xticks([0.5])
     ax.grid(color='grey', axis='x', which='major')
 
-    plot_bar(ax1, bar1, ti1)
-    plot_bar(ax2, bar2, ti2)
+plot_bar(ax1, bar1, ti1)
+plot_bar(ax2, bar2, ti2)
 
-    ax6.set_title(ti6, color='black', size=22, x=0.05, y=0.9, ha='left', fontname='Century Gothic', fontweight='semibold')
-    ax6.axis('off')
-    ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
-    ax7.axis('off')
+ax6.set_title(ti6, color='black', size=22, x=0.05, y=0.9, ha='left', fontname='Century Gothic', fontweight='semibold')
+ax6.axis('off')
+ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
+ax7.axis('off')
 
-    return fig
+return fig
 
 # Streamlit app
 st.title('Análisis de Porteros')
