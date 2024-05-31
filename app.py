@@ -64,45 +64,45 @@ def iqindportero(df, j1):
 
     ax0.axis('off')
 
-def plot_bar(ax, bar_data, title):
-    ax.set_facecolor(c1)
-    ax.set_xlim(0, 1)
-    ax.set_ylim(-1, len(bar_data))
-    ax.set_xticklabels([])
-    ax.yaxis.set_ticks_position('none')
-    df1 = df.reindex(bar_data)
-    df1 = df1.reindex(index=df1.index[::-1])
-    df1 = df1.reset_index()
-    x = df1['index']
-    y = df1[j1]
-    data_color = y
-    normmin = 0
-    normmax = 1
-    data_color = [(x - normmin) / (normmax - normmin) for x in data_color]
-    cmap = LinearSegmentedColormap.from_list('rg', ["darkred", "red", "salmon", "yellowgreen", "green", "darkgreen"], N=256)
-    cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
-    colors = cmap(data_color) if bar_data != 'Pases hacia peligro %' or 'Pass into Danger%' else cmap_invertida(data_color)
-    ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
-    for c in ax.containers:
-        labels = [(y * 100).astype(int) if y > .05 else "" for y in c.datavalues]
-        ax.bar_label(c, labels=labels, label_type='edge', color='w', size=txs, fontweight='bold', padding=padr)
-    for s in ['top', 'bottom', 'left', 'right']:
-        ax.spines[s].set_visible(False)
-    ax.set_yticklabels(df1['index'], color='black', size=20, fontname='Century Gothic', va='center')
-    ax.yaxis.set_tick_params(pad=15)
-    ax.set_title(title, color='black', size=22, x=0, y=0.93, ha='left', fontname='Century Gothic', fontweight='semibold')
-    ax.set_xticks([0.5])
-    ax.grid(color='grey', axis='x', which='major')
+    def plot_bar(ax, bar_data, title):
+        ax.set_facecolor(c1)
+        ax.set_xlim(0, 1)
+        ax.set_ylim(-1, len(bar_data))
+        ax.set_xticklabels([])
+        ax.yaxis.set_ticks_position('none')
+        df1 = df.reindex(bar_data)
+        df1 = df1.reindex(index=df1.index[::-1])
+        df1 = df1.reset_index()
+        x = df1['index']
+        y = df1[j1]
+        data_color = y
+        normmin = 0
+        normmax = 1
+        data_color = [(x - normmin) / (normmax - normmin) for x in data_color]
+        cmap = LinearSegmentedColormap.from_list('rg', ["darkred", "red", "salmon", "yellowgreen", "green", "darkgreen"], N=256)
+        cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
+        colors = cmap(data_color) if title != 'Pases hacia peligro %' else cmap_invertida(data_color)
+        ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
+        for c in ax.containers:
+            labels = [(y * 100).astype(int) if y > .05 else "" for y in c.datavalues]
+            ax.bar_label(c, labels=labels, label_type='edge', color='w', size=txs, fontweight='bold', padding=padr)
+        for s in ['top', 'bottom', 'left', 'right']:
+            ax.spines[s].set_visible(False)
+        ax.set_yticklabels(df1['index'], color='black', size=20, fontname='Century Gothic', va='center')
+        ax.yaxis.set_tick_params(pad=15)
+        ax.set_title(title, color='black', size=22, x=0, y=0.93, ha='left', fontname='Century Gothic', fontweight='semibold')
+        ax.set_xticks([0.5])
+        ax.grid(color='grey', axis='x', which='major')
 
-plot_bar(ax1, bar1, ti1)
-plot_bar(ax2, bar2, ti2)
+    plot_bar(ax1, bar1, ti1)
+    plot_bar(ax2, bar2, ti2)
 
-ax6.set_title(ti6, color='black', size=22, x=0.05, y=0.9, ha='left', fontname='Century Gothic', fontweight='semibold')
-ax6.axis('off')
-ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
-ax7.axis('off')
+    ax6.set_title(ti6, color='black', size=22, x=0.05, y=0.9, ha='left', fontname='Century Gothic', fontweight='semibold')
+    ax6.axis('off')
+    ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
+    ax7.axis('off')
 
-return fig
+    return fig
 
 # Streamlit app
 st.title('Análisis de Porteros')
