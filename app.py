@@ -102,7 +102,7 @@ ax6.axis('off')
 ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
 ax7.axis('off')
 
-    return fig
+return fig
 
 # Streamlit app
 st.title('Análisis de Porteros')
