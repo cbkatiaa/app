@@ -81,7 +81,7 @@ def plot_bar(ax, bar_data, title):
     data_color = [(x - normmin) / (normmax - normmin) for x in data_color]
     cmap = LinearSegmentedColormap.from_list('rg', ["darkred", "red", "salmon", "yellowgreen", "green", "darkgreen"], N=256)
     cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
-    colors = cmap_invertida(data_color) if bar_data == 'Pases hacia peligro %' else cmap(data_color)
+    colors = cmap(data_color) if title != 'Pases hacia peligro %' else cmap_invertida(data_color)
     ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
     for c in ax.containers:
         labels = [(y * 100).astype(int) if y > .05 else "" for y in c.datavalues]
@@ -94,15 +94,15 @@ def plot_bar(ax, bar_data, title):
     ax.set_xticks([0.5])
     ax.grid(color='grey', axis='x', which='major')
 
-   plot_bar(ax1, bar1, ti1)
-   plot_bar(ax2, bar2, ti2)
+plot_bar(ax1, bar1, ti1)
+plot_bar(ax2, bar2, ti2)
 
-   ax6.set_title(ti6, color='black', size=22, x=0.05, y=0.9, ha='left', fontname='Century Gothic', fontweight='semibold')
-   ax6.axis('off')
-   ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
-   ax7.axis('off')
+ax6.set_title(ti6, color='black', size=22, x=0.05, y=0.9, ha='left', fontname='Century Gothic', fontweight='semibold')
+ax6.axis('off')
+ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
+ax7.axis('off')
 
-   return fig
+return fig
 
 # Streamlit app
 st.title('Análisis de Porteros')
