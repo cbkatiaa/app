@@ -11,6 +11,44 @@ import matplotlib.pyplot as plt
 from matplotlib import lines
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib as mp
+import os
+import io
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaIoBaseDownload
+
+# Configuración de Google Drive
+SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+CREDENTIALS_FILE = 'credentials.json'
+TOKEN_FILE = 'token.json'
+FILE_ID = 'https://drive.google.com/file/d/1rFAY-eESn-EdOr3f-hI5_TJ9F4DfTfwT/view?usp=sharing'  # Reemplaza con el ID de tu archivo CSV en Google Drive
+
+def authenticate_google_drive():
+    creds = None
+    if os.path.exists(TOKEN_FILE):
+        creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_FILE, SCOPES)
+            creds = flow.run_local_server(port=0)
+        with open(TOKEN_FILE, 'w') as token:
+            token.write(creds.to_json())
+    return creds
+
+def download_csv_from_google_drive(creds):
+    service = build('drive', 'v3', credentials=creds)
+    request = service.files().get_media(fileId=FILE_ID)
+    fh = io.BytesIO()
+    downloader = MediaIoBaseDownload(fh, request)
+    done = False
+    while not done:
+        status, done = downloader.next_chunk()
+    fh.seek(0)
+    return pd.read_csv(fh)
 
 def iqindportero(df, j1):
     c = 'white'
@@ -108,14 +146,13 @@ def iqindportero(df, j1):
 
     return fig
 
+
 # Streamlit app
 st.title('Análisis de Porteros')
 
-# URL del archivo CSV en GitHub
-file_url = 'https://raw.githubusercontent.com/cbkatiaa/app/main/porteros.csv'
-
-# Leer el archivo CSV desde GitHub
-df = pd.read_csv(file_url)
+# Autenticar y descargar el archivo CSV desde Google Drive
+creds = authenticate_google_drive()
+df = download_csv_from_google_drive(creds)
 
 # Seleccionar temporada, posición y nombre de portera
 temporadas = df['Season'].unique()
