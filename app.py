@@ -13,31 +13,24 @@ import matplotlib.pyplot as plt
 from matplotlib import lines
 from matplotlib.colors import LinearSegmentedColormap
 
-# Conexión a Google Sheets
-def connect_to_google_sheets():
-    scope = ['https://www.googleapis.com/auth/spreadsheets',
-             "https://www.googleapis.com/auth/drive"]
-    credentials = ServiceAccountCredentials.from_json_keyfile_name("gs_credentials.json", scope)
-    client = gspread.authorize(credentials)
-    return client
+# Conectarse a Google Sheets
+scope = ['https://www.googleapis.com/auth/spreadsheets', "https://www.googleapis.com/auth/drive"]
+credentials = ServiceAccountCredentials.from_json_keyfile_name("gs_credentials.json", scope)
+client = gspread.authorize(credentials)
 
-def create_and_update_sheet(client, df):
-    # Crear una hoja de cálculo en blanco
-    sheet = client.create("NewDatabase")
-    # Compartir la hoja de cálculo
-    sheet.share('your_email_goes_here', perm_type='user', role='writer')
-    # Abrir la hoja de cálculo
-    sheet = client.open("NewDatabase").sheet1
-    # Exportar el DataFrame a la hoja de cálculo
-    sheet.update([df.columns.values.tolist()] + df.values.tolist())
-    return sheet
+# Crear una hoja de cálculo en blanco
+sheet = client.create("NewDatabase")
+sheet.share('your_email_goes_here', perm_type='user', role='writer')
+sheet = client.open("NewDatabase").sheet1
 
-def read_sheet_as_dataframe(sheet):
-    # Leer los datos de la hoja de cálculo en un DataFrame de pandas
-    data = sheet.get_all_records()
-    return pd.DataFrame(data)
+# Leer el archivo CSV local y actualizar Google Sheets
+df_local = pd.read_csv('porteros.csv')
+sheet.update([df_local.columns.values.tolist()] + df_local.values.tolist())
 
-# Visualización y análisis de datos
+# Leer datos desde Google Sheets
+data = sheet.get_all_records()
+df = pd.DataFrame(data)
+
 def iqindportero(df, j1):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
@@ -137,28 +130,19 @@ def iqindportero(df, j1):
 # Streamlit app
 st.title('Análisis de Porteros')
 
-# Conectar a Google Sheets
-client = connect_to_google_sheets()
-
-# Leer el archivo CSV local y actualizar Google Sheets
-df = pd.read_csv('porteros.csv')
-sheet = create_and_update_sheet(client, df)
-
-# Leer los datos desde Google Sheets
-df = read_sheet_as_dataframe(sheet)
-
 # Seleccionar temporada, posición y nombre de portero
-temporadas = df['Season'].unique()
-posiciones = df['Primary Position'].unique()
+season = st.selectbox('Temporada', df['Season'].unique())
+position = st.selectbox('Posición', df['Position'].unique())
+player = st.selectbox('Portero', df[df['Position'] == position]['Name'].unique())
 
-temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
-posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
+# Filtrar datos
+df_filtered = df[(df['Season'] == season) & (df['Position'] == position) & (df['Name'] == player)]
 
-df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
-porteros = df_filtrado['Name'].unique()
-portero_seleccionado = st.selectbox("Seleccione al portero", porteros)
-
-if st.button("Generar Análisis"):
-    fig = iqindportero(df_filtrado, portero_seleccionado)
+# Mostrar gráfico
+if not df_filtered.empty:
+    fig = iqindportero(df_filtered, player)
     st.pyplot(fig)
+else:
+    st.write("No hay datos disponibles para esta selección.")
+
 
