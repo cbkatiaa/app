@@ -5,51 +5,39 @@ Created on Thu May 30 10:36:22 2024
 @author: katia
 """
 
-import streamlit as st
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
+import streamlit as st
 import matplotlib.pyplot as plt
 from matplotlib import lines
 from matplotlib.colors import LinearSegmentedColormap
-import matplotlib as mp
-import os
-import io
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
-from googleapiclient.discovery import build
-from googleapiclient.http import MediaIoBaseDownload
 
-# Configuración de Google Drive
-SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
-CREDENTIALS_FILE = 'credentials.json'
-TOKEN_FILE = 'token.json'
-FILE_ID = 'https://drive.google.com/file/d/1rFAY-eESn-EdOr3f-hI5_TJ9F4DfTfwT/view?usp=sharing'  # Reemplaza con el ID de tu archivo CSV en Google Drive
+# Conexión a Google Sheets
+def connect_to_google_sheets():
+    scope = ['https://www.googleapis.com/auth/spreadsheets',
+             "https://www.googleapis.com/auth/drive"]
+    credentials = ServiceAccountCredentials.from_json_keyfile_name("gs_credentials.json", scope)
+    client = gspread.authorize(credentials)
+    return client
 
-def authenticate_google_drive():
-    creds = None
-    if os.path.exists(TOKEN_FILE):
-        creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(CREDENTIALS_FILE, SCOPES)
-            creds = flow.run_local_server(port=0)
-        with open(TOKEN_FILE, 'w') as token:
-            token.write(creds.to_json())
-    return creds
+def create_and_update_sheet(client, df):
+    # Crear una hoja de cálculo en blanco
+    sheet = client.create("NewDatabase")
+    # Compartir la hoja de cálculo
+    sheet.share('your_email_goes_here', perm_type='user', role='writer')
+    # Abrir la hoja de cálculo
+    sheet = client.open("NewDatabase").sheet1
+    # Exportar el DataFrame a la hoja de cálculo
+    sheet.update([df.columns.values.tolist()] + df.values.tolist())
+    return sheet
 
-def download_csv_from_google_drive(creds):
-    service = build('drive', 'v3', credentials=creds)
-    request = service.files().get_media(fileId=FILE_ID)
-    fh = io.BytesIO()
-    downloader = MediaIoBaseDownload(fh, request)
-    done = False
-    while not done:
-        status, done = downloader.next_chunk()
-    fh.seek(0)
-    return pd.read_csv(fh)
+def read_sheet_as_dataframe(sheet):
+    # Leer los datos de la hoja de cálculo en un DataFrame de pandas
+    data = sheet.get_all_records()
+    return pd.DataFrame(data)
 
+# Visualización y análisis de datos
 def iqindportero(df, j1):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
@@ -146,15 +134,20 @@ def iqindportero(df, j1):
 
     return fig
 
-
 # Streamlit app
 st.title('Análisis de Porteros')
 
-# Autenticar y descargar el archivo CSV desde Google Drive
-creds = authenticate_google_drive()
-df = download_csv_from_google_drive(creds)
+# Conectar a Google Sheets
+client = connect_to_google_sheets()
 
-# Seleccionar temporada, posición y nombre de portera
+# Leer el archivo CSV local y actualizar Google Sheets
+df = pd.read_csv('porteros.csv')
+sheet = create_and_update_sheet(client, df)
+
+# Leer los datos desde Google Sheets
+df = read_sheet_as_dataframe(sheet)
+
+# Seleccionar temporada, posición y nombre de portero
 temporadas = df['Season'].unique()
 posiciones = df['Primary Position'].unique()
 
@@ -162,9 +155,10 @@ temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
 posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
 
 df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
-porteras = df_filtrado['Name'].unique()
-portera_seleccionada = st.selectbox("Seleccione al portero", porteras)
+porteros = df_filtrado['Name'].unique()
+portero_seleccionado = st.selectbox("Seleccione al portero", porteros)
 
 if st.button("Generar Análisis"):
-    fig = iqindportero(df_filtrado, portera_seleccionada)
+    fig = iqindportero(df_filtrado, portero_seleccionado)
     st.pyplot(fig)
+
