@@ -5,31 +5,14 @@ Created on Thu May 30 10:36:22 2024
 @author: katia
 """
 
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-import pandas as pd
 import streamlit as st
+import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import lines
 from matplotlib.colors import LinearSegmentedColormap
-
-# Conectarse a Google Sheets
-scope = ['https://www.googleapis.com/auth/spreadsheets', "https://www.googleapis.com/auth/drive"]
-credentials = ServiceAccountCredentials.from_json_keyfile_name("gs_credentials.json", scope)
-client = gspread.authorize(credentials)
-
-# Crear una hoja de cálculo en blanco
-sheet = client.create("NewDatabase")
-sheet.share('your_email_goes_here', perm_type='user', role='writer')
-sheet = client.open("NewDatabase").sheet1
-
-# Leer el archivo CSV local y actualizar Google Sheets
-df_local = pd.read_csv('porteros.csv')
-sheet.update([df_local.columns.values.tolist()] + df_local.values.tolist())
-
-# Leer datos desde Google Sheets
-data = sheet.get_all_records()
-df = pd.DataFrame(data)
+import matplotlib as mp
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 def iqindportero(df, j1):
     c = 'white'
@@ -127,22 +110,33 @@ def iqindportero(df, j1):
 
     return fig
 
-# Streamlit app
 st.title('Análisis de Porteros')
 
-# Seleccionar temporada, posición y nombre de portero
-season = st.selectbox('Temporada', df['Season'].unique())
-position = st.selectbox('Posición', df['Position'].unique())
-player = st.selectbox('Portero', df[df['Position'] == position]['Name'].unique())
+# Google Sheets authentication
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+client = gspread.authorize(creds)
 
-# Filtrar datos
-df_filtered = df[(df['Season'] == season) & (df['Position'] == position) & (df['Name'] == player)]
+# Google Sheets file key
+file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 
-# Mostrar gráfico
-if not df_filtered.empty:
-    fig = iqindportero(df_filtered, player)
+# Open the Google Sheets file and select the worksheet
+sheet = client.open_by_key(file_key).sheet1
+
+# Convert worksheet data into DataFrame
+df = pd.DataFrame(sheet.get_all_records())
+
+# Streamlit app continuation...
+temporadas = df['Season'].unique()
+posiciones = df['Primary Position'].unique()
+
+temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
+posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
+
+df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
+porteras = df_filtrado['Name'].unique()
+portera_seleccionada = st.selectbox("Seleccione al portero", porteras)
+
+if st.button("Generar Análisis"):
+    fig = iqindportero(df_filtrado, portera_seleccionada)
     st.pyplot(fig)
-else:
-    st.write("No hay datos disponibles para esta selección.")
-
-
