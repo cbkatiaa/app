@@ -240,7 +240,7 @@ def iqindcentral(df, j1):
 
 def cargar_datos():
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('credenciales.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
     cliente = gspread.authorize(creds)
     hoja = cliente.open('Estadísticas de Jugadores').sheet1
     datos = hoja.get_all_records()
