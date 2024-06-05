@@ -106,11 +106,11 @@ def iqindportero(df, j1):
     return fig
 
 def iqindcentral(df, j1):
-    c = 'white'
+    c='white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
     fig.set_figwidth(31)
-    sh = 33
+    sh=33
     ax0 = plt.subplot2grid(shape=(sh, 7), loc=(0, 0), colspan=4, rowspan=6)
     ax1 = plt.subplot2grid(shape=(sh, 7), loc=(6, 0), colspan=4, rowspan=9)
     ax2 = plt.subplot2grid(shape=(sh, 7), loc=(15, 0), colspan=4, rowspan=3)
@@ -121,32 +121,49 @@ def iqindcentral(df, j1):
     ax7 = plt.subplot2grid(shape=(sh, 7), loc=(3, 4), colspan=3, rowspan=12)
     ax8 = plt.subplot2grid(shape=(sh, 7), loc=(18, 4), colspan=3, rowspan=1)
     ax9 = plt.subplot2grid(shape=(sh, 7), loc=(19, 4), colspan=3, rowspan=12)
-    fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.05, hspace=0.3)
+    fig.subplots_adjust(left=0.1,
+                        bottom=0.1,
+                        right=0.9,
+                        top=0.9,
+                        wspace=0.05,
+                        hspace=0.3)
 
-    bar1 = ['Presiones', 'Altura de presiones', 'Acciones agresivas', 'Recuperación tras presión %', 'Contrapresiones', 'Entradas', 'Éxito 1vs1 defensivo', 'Intercepciones']
-    bar2 = ['Despejes', 'Calidad despejes', 'Duelos aéreos defensivos', 'Duelos aéreos ofensivos']
-    bar3 = ['Goles', 'xG', 'Remates', 'Asistencias', 'xA', 'Acciones Generación de Disparo', 'Tiros al área', 'Pases al área', 'Conducciones al área']
-    bar4 = ['% acierto pases', 'Pases', 'Distancia pases', 'Pases largos %', 'Pases Peligro %', 'Pases entre líneas', 'Distancia progresiva', 'Distancia progresiva/90']
-    bar5 = ['Faltas cometidas', 'Penales cometidos', 'Errores']
+    bar1=['Presiones','Altura de presiones','Acciones agresivas', 'Recuperación tras presión %','Contrapresiones', 'Entradas','Éxito 1vs1 defensivo','Intercepciones']
+    bar2=['Despejes','Tiros bloqueados']
+    bar3=['Duelos aéreos ganados', 'Éxito duelos aéreos']
+    bar4=['Pases','% pases con zurdo','Éxito pases','Pases largos por pases','Progresiones al último tercio','Éxito pases largos','Éxito pases bajo presión','Distancia conducciones']
+    bar5=['xG','Toques en el área']
 
-    ti1 = 'Presión'
-    ti2 = 'Defensa'
-    ti3 = 'Ataque'
-    ti4 = 'Posesión'
-    ti5 = 'Disciplina'
-    ti6 = 'Tiros en contra'
-    ti7 = 'Penales en contra'
+    t2='Pases'
+    t3='Presiones'
+    t4='xA'
+    t5='Pases progresivos'
 
-    c1 = 'white'
-    txs = 22
-    padr = -45
+    ti1='Defensivo- activo'
+    ti2='Defensivo- última línea'
+    ti3='Juego aéreo'
+    ti4='Posesión'
+    ti5='Ofensivo'
+
+    c1='white'
+    y1=-3
+    vmax=4
+    txs=18
+    txs1=22
+    padr=-40
+
+    cmap='OrRd'
+
 
     fig.add_artist(lines.Line2D([.57, .57], [1, 0.1], color='#293A4A', lw=5))
-    fig.add_artist(lines.Line2D([-.04, .57], [.91, 0.91], color='#293A4A', lw=5))
+    fig.add_artist(lines.Line2D([-.04, .57], [.78, 0.78], color='#293A4A', lw=5))
     fig.add_artist(lines.Line2D([.57, .91], [.5, 0.5], color='#293A4A', lw=5))
+    #fig.add_artist(lines.Line2D([.6, .91], [.37, 0.37], color='#293A4A', lw=5))
 
     plt.rcParams["font.family"] = "Century Gothic"
-
+    
+    df = csv
+    
     df['Press %']=df['Pressure Regains']/df['Pressures']
     df['Éxito duelos aéreos']=df['Aerial Win%'].rank(pct=True)
     df['Duelos aéreos ganados']=df['Aerial Wins'].rank(pct=True)
@@ -231,12 +248,13 @@ def iqindcentral(df, j1):
     df['Long balls per pass']=df['Long balls total']/df['OP Passes']
     df['Pases largos por pases']=df['Long balls per pass'].rank(pct=True)
     df['% pases con zurdo']=df['L/R Footedness%']/100
+    
+    dfp=df
+    df=df.loc[df['Name']==j1]
+    df=df.set_index('Name')
+    df=df.transpose()    
 
-    df = df.loc[df['Name'] == j1]
-    df = df.set_index('Name')
-    df = df.transpose()
-
-    ax0.axis('off')
+    ax0=ax0.axis('off')
 
     def plot_bar(ax, bar_data, title):
         ax.set_facecolor(c1)
