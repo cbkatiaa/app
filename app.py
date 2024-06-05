@@ -110,8 +110,7 @@ def iqindportero(df, j1):
 
     return fig
 
-def iqindcentral(df,j1 , temporada_seleccionada, posicion_seleccionada):
-    df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
+def iqindcentral(df, j1):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
@@ -261,5 +260,5 @@ temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
 posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
 
 if st.button("Generar Análisis"):
-    fig = iqindcentral(df, temporada_seleccionada, posicion_seleccionada)
+    fig = iqindcentral(df, jugador_seleccionado)
     st.pyplot(fig)
