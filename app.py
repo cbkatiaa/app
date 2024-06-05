@@ -158,7 +158,7 @@ def iqindcentral(df, j1):
     #df['Recuperación tras presión %'] = df['Pressures Recovery %'].rank(pct=True)
     df['Contrapresiones'] = df['Counterpressures'].rank(pct=True)
     df['Entradas'] = df['Tackles'].rank(pct=True)
-    df['Éxito 1vs1 defensivo'] = df['Defensive 1vs1 Success %'].rank(pct=True)
+    3df['Éxito 1vs1 defensivo'] = df['Dribbles Stopped%'].rank(pct=True)
     df['Intercepciones'] = df['Interceptions'].rank(pct=True)
     df['Despejes'] = df['Clearances'].rank(pct=True)
     df['Calidad despejes'] = 1 - df['Clearance Errors'].rank(pct=True)
