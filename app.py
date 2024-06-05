@@ -255,11 +255,11 @@ def iqindcentral(df, j1):
         data_color = [(x - normmin) / (normmax - normmin) for x in data_color]
         cmap = LinearSegmentedColormap.from_list('rg', ["darkred", "red", "salmon", "yellowgreen", "green", "darkgreen"], N=256)
         cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
-        for data in bar_data:
-            if bar_data == 'Pases Peligro %':
-                colors = cmap_invertida(data_color)
-            else:
-                colors = cmap(data_color)
+        #for data in bar_data:
+         #   if bar_data == 'Pases Peligro %':
+         #     colors = cmap_invertida(data_color)
+         #   else:
+          #      colors = cmap(data_color)
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
         for c in ax.containers:
             labels = [(y * 100).astype(int) if y > .05 else "" for y in c.datavalues]
@@ -312,7 +312,7 @@ jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
 
 if st.button("Generar Análisis"):
-    if posicion_seleccionada == "Goalkeeper":
+    if posicion_seleccionada == "Portero":
         fig = iqindportero(df_filtrado, jugador_seleccionado)
     else:
         fig = iqindcentral(df_filtrado, jugador_seleccionado)
