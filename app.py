@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May 30 10:36:22 2024
-
-@author: katia
-"""
 
 import streamlit as st
 import pandas as pd
@@ -238,18 +233,18 @@ def iqindcentral(df, j1):
 
     return fig
 
-# Google Sheets authentication
+
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 client = gspread.authorize(creds)
 
-# Google Sheets file key
+
 file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 
-# Open the Google Sheets file and select the worksheet
+
 sheet = client.open_by_key(file_key).sheet1
 
-# Convert worksheet data into DataFrame
+
 df = pd.DataFrame(sheet.get_all_records())
 
 
