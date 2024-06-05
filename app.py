@@ -110,7 +110,7 @@ def iqindportero(df, j1):
 
     return fig
 
-def iqindcentral(df,j1,df, temporada_seleccionada, posicion_seleccionada):
+def iqindcentral(df,j1 , temporada_seleccionada, posicion_seleccionada):
     df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
