@@ -153,7 +153,7 @@ def iqindcentral(df, j1):
     plt.rcParams["font.family"] = "Century Gothic"
 
     df['Presiones'] = df['Pressures'].rank(pct=True)
-    df['Altura de presiones'] = df['Height Pressures'].rank(pct=True)
+    #df['Altura de presiones'] = df['Height Pressures'].rank(pct=True)
     df['Acciones agresivas'] = df['Aggressive Actions'].rank(pct=True)
     df['Recuperación tras presión %'] = df['Pressures Recovery %'].rank(pct=True)
     df['Contrapresiones'] = df['Counter Pressures'].rank(pct=True)
