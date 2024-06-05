@@ -252,7 +252,7 @@ sheet = client.open_by_key(file_key).sheet1
 # Convert worksheet data into DataFrame
 df = pd.DataFrame(sheet.get_all_records())
 
-# Streamlit app continuation...
+
 temporadas = df['Season'].unique()
 posiciones = df['Primary Position'].unique()
 
@@ -263,8 +263,9 @@ df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Positio
 jugadores = df_filtrado['Name'].unique()
 jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
+
 if st.button("Generar Análisis"):
-    if posicion_seleccionada == "Portero":
+    if posicion_seleccionada == "Goalkeeper":
         fig = iqindportero(df_filtrado, jugador_seleccionado)
     else:
         fig = iqindcentral(df_filtrado, jugador_seleccionado)
