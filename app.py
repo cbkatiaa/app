@@ -238,26 +238,35 @@ def iqindcentral(df, j1):
 
     return fig
 
-def cargar_datos():
-    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
-    cliente = gspread.authorize(creds)
-    hoja = cliente.open('Estadísticas de Jugadores').sheet1
-    datos = hoja.get_all_records()
-    return pd.DataFrame(datos)
+# Google Sheets authentication
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+client = gspread.authorize(creds)
 
-def main():
-    st.title('Análisis de Desempeño de Jugadores')
-    df = cargar_datos()
-    jugadores = df['Name'].unique()
-    jugador_seleccionado = st.selectbox('Selecciona un jugador', jugadores)
-    posicion = st.radio('Selecciona la posición del jugador', ('Portero', 'Defensa Central'))
-    if st.button('Generar Informe'):
-        if posicion == 'Portero':
-            fig = iqindportero(df, jugador_seleccionado)
-        else:
-            fig = iqindcentral(df, jugador_seleccionado)
-        st.pyplot(fig)
+# Google Sheets file key
+file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 
-if __name__ == '__main__':
-    main()
+# Open the Google Sheets file and select the worksheet
+sheet = client.open_by_key(file_key).sheet1
+
+# Convert worksheet data into DataFrame
+df = pd.DataFrame(sheet.get_all_records())
+
+# Streamlit app continuation...
+temporadas = df['Season'].unique()
+posiciones = df['Primary Position'].unique()
+
+temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
+posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
+
+df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
+jugadores = df_filtrado['Name'].unique()
+jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
+
+if st.button("Generar Análisis"):
+    if posicion_seleccionada == 'Portero':
+        fig = iqindportero(df_filtrado, jugador_seleccionado)
+    else:
+        fig = iqindcentral(df_filtrado, jugador_seleccionado)
+    st.pyplot(fig)
+
