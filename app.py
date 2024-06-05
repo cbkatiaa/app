@@ -267,5 +267,5 @@ if st.button("Generar Análisis"):
     if posicion_seleccionada == "Portero":
         fig = iqindportero(df_filtrado, jugador_seleccionado)
     else:
-        fig = iqindcentral(df_filtrado, jugador_seleccionado, temporada_seleccionada, posicion_seleccionada)
+        fig = iqindcentral(df_filtrado, jugador_seleccionado)
     st.pyplot(fig)
