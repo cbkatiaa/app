@@ -162,8 +162,7 @@ def iqindcentral(df, j1):
 
     plt.rcParams["font.family"] = "Century Gothic"
     
-    df = csv
-    
+
     df['Press %']=df['Pressure Regains']/df['Pressures']
     df['Éxito duelos aéreos']=df['Aerial Win%'].rank(pct=True)
     df['Duelos aéreos ganados']=df['Aerial Wins'].rank(pct=True)
