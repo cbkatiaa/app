@@ -38,7 +38,7 @@ def iqindportero(df, j1):
     fig.add_artist(lines.Line2D([-.04, .57], [.76, 0.76], color='#293A4A', lw=5))
     fig.add_artist(lines.Line2D([.57, .91], [.5, 0.5], color='#293A4A', lw=5))
 
-    plt.rcParams["font.family"] = "Century Gothic"
+    plt.rcParams["font.family"] = "Century Gothic" 
 
     df['Long balls total'] = (df['Long Balls'] / df['Long Ball%']) * 100
     df['Long balls per pass'] = df['Long balls total'] / df['OP Passes']
