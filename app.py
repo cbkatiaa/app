@@ -243,6 +243,7 @@ def iqindcentral(df, j1):
     df['Pases largos por pases']=df['Long balls per pass'].rank(pct=True)
     df['% pases con zurdo']=df['L/R Footedness%']/100
 
+
     df = df.loc[df['Name'] == j1]
     df = df.set_index('Name').transpose()
 
@@ -277,13 +278,13 @@ def iqindcentral(df, j1):
         ax.grid(color='grey', axis='x', which='major')
 
     # Generar gráficos para cada categoría
-    plot_bar(ax0, bar1, ti1)
-    plot_bar(ax1, bar2, ti2)
-    plot_bar(ax2, bar3, ti3)
-    plot_bar(ax3, bar4, ti4)
-    plot_bar(ax4, bar5, ti5)
+    plot_bar(axs[0, 0], bar1, ti1)
+    plot_bar(axs[0, 1], bar2, ti2)
+    plot_bar(axs[0, 2], bar3, ti3)
+    plot_bar(axs[1, 0], bar4, ti4)
+    plot_bar(axs[1, 1], bar5, ti5)
 
-    ax5.axis('off')
+    axs[1, 2].axis('off')
 
     return fig
 
