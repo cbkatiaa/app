@@ -82,7 +82,7 @@ def iqindportero(df, j1):
     df = df.loc[df['Name'] == j1]
     df = df.set_index('Name').transpose()
 
-     def plot_bar(ax, bar_data, title):
+    def plot_bar(ax, bar_data, title):
         ax.set_facecolor(c1)
         ax.set_xlim(0, 1)
         ax.set_ylim(-1, len(bar_data))
