@@ -312,11 +312,14 @@ temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
 posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
 
 df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
-porteras = df_filtrado['Name'].unique()
-portera_seleccionada = st.selectbox("Seleccione al portero", porteras)
+jugadores = df_filtrado['Name'].unique()
+jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
 if st.button("Generar Análisis"):
-    fig = iqindportero(df_filtrado, portera_seleccionada)
+    if posicion_seleccionada == "Portero":
+        fig = iqindportero(df_filtrado, jugador_seleccionado)
+    else:
+        fig = iqindcentral(df_filtrado, jugador_seleccionado)
     st.pyplot(fig)
 
 
