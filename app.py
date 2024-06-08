@@ -82,46 +82,50 @@ def iqindportero(df, j1):
     df = df.loc[df['Name'] == j1]
     df = df.set_index('Name').transpose()
 
-    def plot_bar(ax, bar_data, title):
+     def plot_bar(ax, bar_data, title):
         ax.set_facecolor(c1)
         ax.set_xlim(0, 1)
         ax.set_ylim(-1, len(bar_data))
         ax.set_xticklabels([])
         ax.yaxis.set_ticks_position('none')
-
-        df1 = df.reindex(bar_data).reindex(index=bar_data[::-1]).reset_index()
+        df1 = df.reindex(bar_data)
+        df1 = df1.reindex(index=df1.index[::-1])
+        df1 = df1.reset_index()
         x = df1['index']
         y = df1[j1]
-
-        data_color = [(x - 0) / (1 - 0) for x in y]
+        data_color = y
+        normmin = 0
+        normmax = 1
+        data_color = [(x - normmin) / (normmax - normmin) for x in data_color]
         cmap = LinearSegmentedColormap.from_list('rg', ["darkred", "red", "salmon", "yellowgreen", "green", "darkgreen"], N=256)
-        
-        colors = [cmap(val) for val in data_color]
+        cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
+        for data in bar_data:
+            if bar_data == 'Pases hacia peligro %' or bar_data == 'Pass into Danger%':
+                colors = cmap_invertida(data_color)
+            else:
+                colors = cmap(data_color)
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
-        
-        for container in ax.containers:
-            labels = [(val * 100).astype(int) if val > .05 else "" for val in container.datavalues]
-            ax.bar_label(container, labels=labels, label_type='edge', color='w', size=txs, fontweight='bold', padding=padr)
-
-        for spine in ['top', 'bottom', 'left', 'right']:
-            ax.spines[spine].set_visible(False)
-
+        for c in ax.containers:
+            labels = [(y * 100).astype(int) if y > .05 else "" for y in c.datavalues]
+            ax.bar_label(c, labels=labels, label_type='edge', color='w', size=txs, fontweight='bold', padding=padr)
+        for s in ['top', 'bottom', 'left', 'right']:
+            ax.spines[s].set_visible(False)
         ax.set_yticklabels(df1['index'], color='black', size=20, fontname='Century Gothic', va='center')
         ax.yaxis.set_tick_params(pad=15)
         ax.set_title(title, color='black', size=22, x=0, y=0.93, ha='left', fontname='Century Gothic', fontweight='semibold')
         ax.set_xticks([0.5])
         ax.grid(color='grey', axis='x', which='major')
 
-    # Generar gráficos para cada categoría
-    plot_bar(axs[0, 0], bar1, ti1)
-    plot_bar(axs[0, 1], bar2, ti2)
-    plot_bar(axs[0, 2], bar3, ti3)
-    plot_bar(axs[1, 0], bar4, ti4)
-    plot_bar(axs[1, 1], bar5, ti5)
+    plot_bar(ax1, bar1, ti1)
+    plot_bar(ax2, bar2, ti2)
 
-    axs[1, 2].axis('off')
+    ax6.set_title(ti6, color='black', size=22, x=0.05, y=0.9, ha='left', fontname='Century Gothic', fontweight='semibold')
+    ax6.axis('off')
+    ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
+    ax7.axis('off')
 
     return fig
+
 
 # Función para generar el análisis de centrales
 def iqindcentral(df, j1):
