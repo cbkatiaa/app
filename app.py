@@ -288,7 +288,7 @@ def iqindcentral(df, j1):
 
     return fig
 
-st.title('Análisis de Porteros')
+st.title('Análisis de Jugadores')
 
 # Google Sheets authentication
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
