@@ -288,33 +288,35 @@ def iqindcentral(df, j1):
 
     return fig
 
+# Título de la aplicación
 st.title('Análisis de Jugadores')
 
-# Google Sheets authentication
+# Autenticación con Google Sheets
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 client = gspread.authorize(creds)
 
-# Google Sheets file key
+# Clave del archivo de Google Sheets
 file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 
-# Open the Google Sheets file and select the worksheet
+# Abre el archivo de Google Sheets y selecciona la hoja de cálculo
 sheet = client.open_by_key(file_key).sheet1
 
-# Convert worksheet data into DataFrame
+# Convierte los datos de la hoja de cálculo en un DataFrame
 df = pd.DataFrame(sheet.get_all_records())
 
-# Streamlit app continuation...
+# Continuación de la aplicación de Streamlit...
 temporadas = df['Season'].unique()
 posiciones = df['Primary Position'].unique()
 
+# Selección de temporada y posición
 temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
 posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
 
+# Filtrado de datos según la temporada y posición seleccionadas
 df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
 jugadores = df_filtrado['Name'].unique()
 jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
-
 
 # Diccionario que mapea cada posición a su función de gráficos correspondiente
 posicion_funciones = {
