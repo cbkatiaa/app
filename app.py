@@ -315,11 +315,23 @@ df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Positio
 jugadores = df_filtrado['Name'].unique()
 jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
-if st.button("Generar Análisis"):
-    if posicion_seleccionada == "Portero":
-        fig = iqindportero(df_filtrado, jugador_seleccionado)
-    else:
-        fig = iqindcentral(df_filtrado, jugador_seleccionado)
-    st.pyplot(fig)
 
+# Diccionario que mapea cada posición a su función de gráficos correspondiente
+posicion_funciones = {
+    "Portero": iqindportero,
+    "Central": iqindcentral
+    # Agrega aquí más posiciones y sus funciones según sea necesario
+}
+
+# Generar y mostrar el gráfico según la posición seleccionada
+if st.button("Generar Análisis"):
+    # Obtener la función de gráficos correspondiente desde el diccionario
+    funcion_grafico = posicion_funciones.get(posicion_seleccionada)
+    
+    # Si existe una función para la posición seleccionada, generar el gráfico
+    if funcion_grafico:
+        fig = funcion_grafico(df_filtrado, jugador_seleccionado)
+        st.pyplot(fig)
+    else:
+        st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
 
