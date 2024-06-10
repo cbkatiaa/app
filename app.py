@@ -318,8 +318,10 @@ jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
 # Diccionario que mapea cada posición a su función de gráficos correspondiente
 posicion_funciones = {
-    "Portero": iqindportero,
-    "Central": iqindcentral
+    "Goalkeeper": iqindportero,
+    "Right Centre Back": iqindcentral,
+    "Left Centre Back": iqindcentral,
+    "Centre Back": iqindcentral
     # Agrega aquí más posiciones y sus funciones según sea necesario
 }
 
