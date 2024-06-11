@@ -147,7 +147,7 @@ def iqindcentral(df, j1):
 
     c1 = 'white'
     y1 = -3
-    vmax = 4
+    #vmax = 4
     txs = 18
     txs1 = 22
     padr = -40
