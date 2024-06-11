@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+_# -*- coding: utf-8 -*-
 
 import streamlit as st
 import pandas as pd
@@ -61,7 +61,7 @@ def iqindportero(df, j1):
 
     ax0.axis('off')
 
-    def plot_bar(ax, bar_data, title):
+    def plot_bar_portero(ax, bar_data, title):
         ax.set_facecolor(c1)
         ax.set_xlim(0, 1)
         ax.set_ylim(-1, len(bar_data))
@@ -247,7 +247,7 @@ def iqindcentral(df, j1):
     df = df.loc[df['Name'] == j1]
     df = df.set_index('Name').transpose()
 
-    def plot_bar(ax, bar_data, title):
+    def plot_bar_central(ax, bar_data, title):
         ax.set_facecolor(c1)
         ax.set_xlim(0, 1)
         ax.set_ylim(-1, len(bar_data))
@@ -278,13 +278,13 @@ def iqindcentral(df, j1):
         ax.grid(color='grey', axis='x', which='major')
 
 
-    plot_bar(axs[0, 0], bar1, ti1)
-    plot_bar(axs[0, 1], bar2, ti2)
-    plot_bar(axs[0, 2], bar3, ti3)
-    plot_bar(axs[1, 0], bar4, ti4)
-    plot_bar(axs[1, 1], bar5, ti5)
+    plot_bar(ax1, bar1, ti1)
+    plot_bar(ax2, bar2, ti2)
+    plot_bar(ax3, bar3, ti3)
+    plot_bar(ax4, bar4, ti4)
+    plot_bar(ax5, bar5, ti5)
 
-    axs[1, 2].axis('off')
+    
 
     return fig
 
