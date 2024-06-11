@@ -250,6 +250,8 @@ def iqindcentral(df, j1):
     df = df.set_index('Name').transpose()
 
     ax0.axis('off')
+    ax6.axis('off')
+    ax7.axis('off')
 
     def plot_bar_central(ax, bar_data, title):
         #ax=ax.axis('off')
