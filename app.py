@@ -129,7 +129,7 @@ def iqindcentral(df, j1):
                         hspace=0.3)
 
     bar1=['Presiones', 'Recuperación tras presión %','Entradas','Éxito 1vs1 defensivo','Intercepciones']
-    bar2=['Despejes','Tiros bloqueados','Balones ganados área'-]
+    bar2=['Despejes','Tiros bloqueados','Balones ganados área']
     bar3=['Duelos aéreos ganados', 'Éxito duelos aéreos']
     bar4=['Pases','% pases con zurdo','Éxito pases','Pases largos por pases','Progresiones al último tercio','Éxito pases largos','Éxito pases bajo presión','Distancia conducciones']
     bar5=['xG','Toques en el área']
