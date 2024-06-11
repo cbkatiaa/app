@@ -95,8 +95,8 @@ def iqindportero(df, j1):
         ax.set_xticks([0.5])
         ax.grid(color='grey', axis='x', which='major')
 
-    plot_bar(ax1, bar1, ti1)
-    plot_bar(ax2, bar2, ti2)
+    plot_bar_portero(ax1, bar1, ti1)
+    plot_bar_portero(ax2, bar2, ti2)
 
     ax6.set_title(ti6, color='black', size=22, x=0.05, y=0.9, ha='left', fontname='Century Gothic', fontweight='semibold')
     ax6.axis('off')
@@ -278,11 +278,11 @@ def iqindcentral(df, j1):
         ax.grid(color='grey', axis='x', which='major')
 
 
-    plot_bar(ax1, bar1, ti1)
-    plot_bar(ax2, bar2, ti2)
-    plot_bar(ax3, bar3, ti3)
-    plot_bar(ax4, bar4, ti4)
-    plot_bar(ax5, bar5, ti5)
+    plot_bar_central(ax1, bar1, ti1)
+    plot_bar_central(ax2, bar2, ti2)
+    plot_bar_central(ax3, bar3, ti3)
+    plot_bar_central(ax4, bar4, ti4)
+    plot_bar_central(ax5, bar5, ti5)
 
     
 
