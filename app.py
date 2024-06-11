@@ -333,7 +333,7 @@ posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
 equipo_seleccionado = st.selectbox("Selecciona el equipo", equipos)
 
 # Filtrado de datos según la temporada y posición seleccionadas
-df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada) & (dfdf['Team'] == equipo_seleccionado]
+df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada) & (dfdf['Team'] == equipo_seleccionado)]
 jugadores = df_filtrado['Name'].unique()
 jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
