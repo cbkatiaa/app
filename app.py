@@ -347,7 +347,7 @@ if st.button("Generar Análisis"):
     funcion_grafico = posicion_funciones.get(posicion_seleccionada)
     
     if funcion_grafico:
-        fig = funcion_grafico(df_filtrado, jugador_seleccionado, posicion)
+        fig = funcion_grafico(df_filtrado, jugador_seleccionado, posicion_seleccionada)
         st.pyplot(fig)
     else:
         st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
