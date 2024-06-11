@@ -81,7 +81,7 @@ def iqindportero(df, j1, pos):
 
         colors = []
         for i, bar in enumerate(bar_data):
-            if bar == 'Pases hacia peligro %':
+            if bar == 'Pases hacia peligro %' or bar == 'Pass into Danger%':
                 colors.append(cmap_invertida(data_color[i]))
             else:
                 colors.append(cmap(data_color[i]))
