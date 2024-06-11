@@ -103,6 +103,11 @@ def iqindportero(df, j1):
     ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
     ax7.axis('off')
 
+    j1 = j1.upper()
+    pos = pos.upper()
+    plt.figtext(0.05, 0.98, j1, c='#151616', fontsize=56, fontweight='bold', fontname='arial')
+    plt.figtext(0.05, 0.94, pos, c='#151616', fontsize=40, fontweight='bold', fontname='arial')
+
     return fig
 
 def iqindcentral(df, j1):
@@ -293,7 +298,11 @@ def iqindcentral(df, j1):
     plot_bar_central(ax4, bar4, ti4)
     plot_bar_central(ax5, bar5, ti5)
 
-    
+    j1 = j1.upper()
+    pos = pos.upper()
+    plt.figtext(0.05, 0.98, j1, c='#151616', fontsize=56, fontweight='bold', fontname='arial')
+    plt.figtext(0.05, 0.94, pos, c='#151616', fontsize=40, fontweight='bold', fontname='arial')
+
 
     return fig
 
