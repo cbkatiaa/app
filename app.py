@@ -252,6 +252,7 @@ def iqindcentral(df, j1):
     ax0.axis('off')
     ax6.axis('off')
     ax7.axis('off')
+    ax8.axis('off')
     ax9.axis('off')
 
     def plot_bar_central(ax, bar_data, title):
