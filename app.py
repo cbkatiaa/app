@@ -155,6 +155,7 @@ def iqindcentral(df, j1):
     fig.add_artist(lines.Line2D([.57, .57], [1, 0.1], color='#293A4A', lw=5))
     fig.add_artist(lines.Line2D([-.04, .57], [.78, 0.78], color='#293A4A', lw=5))
     fig.add_artist(lines.Line2D([.57, .91], [.5, 0.5], color='#293A4A', lw=5))
+    #fig.add_artist(lines.Line2D([.6, .91], [.37, 0.37], color='#293A4A', lw=5))
 
     plt.rcParams["font.family"] = "Century Gothic"
 
@@ -249,6 +250,7 @@ def iqindcentral(df, j1):
     df = df.set_index('Name').transpose()
 
     def plot_bar_central(ax, bar_data, title):
+        ax0=ax0.axis('off')
         ax.set_facecolor(c1)
         ax.set_xlim(0, 1)
         ax.set_ylim(-1, len(bar_data))
