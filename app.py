@@ -249,6 +249,8 @@ def iqindcentral(df, j1):
     df = df.loc[df['Name'] == j1]
     df = df.set_index('Name').transpose()
 
+    ax0.axis('off')
+
     def plot_bar_central(ax, bar_data, title):
         #ax=ax.axis('off')
         ax.set_facecolor(c1)
