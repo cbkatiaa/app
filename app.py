@@ -337,7 +337,7 @@ jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
 
 posicion_funciones = {
-    "Goalkeeper": iqindportero,
+    "Portero": iqindportero,
     "Right Centre Back": iqindcentral,
     "Left Centre Back": iqindcentral,
     "Centre Back": iqindcentral
