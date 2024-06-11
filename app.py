@@ -78,8 +78,11 @@ def iqindportero(df, j1, pos):
         data_color = [(x - normmin) / (normmax - normmin) for x in data_color]
         cmap = LinearSegmentedColormap.from_list('rg', ["darkred", "red", "salmon", "yellowgreen", "green", "darkgreen"], N=256)
         cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
-        for title == 'Pases hacia peligro %' or title == 'Pass into Danger%' in bar_data:
-                colors = cmap_invertida(data_color)
+        for title in bar_data:
+            if title == 'Pases hacia peligro %' or title == 'Pass into Danger%':
+                for title == 'Pases hacia peligro %' or title == 'Pass into Danger%':
+                    colors = cmap_invertida(data_color)
+            else colors = cmap(data_color)
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
         
         for c in ax.containers:
