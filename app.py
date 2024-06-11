@@ -79,7 +79,7 @@ def iqindportero(df, j1, pos):
         cmap = LinearSegmentedColormap.from_list('rg', ["darkred", "red", "salmon", "yellowgreen", "green", "darkgreen"], N=256)
         cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
 
-        # Crear los colores para cada barra individualmente
+        
         colors = []
         for i, label in enumerate(df1['index']):
             if label == 'Pases hacia peligro %':
@@ -87,7 +87,7 @@ def iqindportero(df, j1, pos):
             else:
                 colors.append(cmap(data_color[i]))
 
-        # Graficar las barras con los colores correctos
+
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
         
         for c in ax.containers:
