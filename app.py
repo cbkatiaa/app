@@ -80,7 +80,6 @@ def iqindportero(df, j1, pos):
         cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
         for title in bar_data:
             if title == 'Pases hacia peligro %' or title == 'Pass into Danger%':
-                for title == 'Pases hacia peligro %' or title == 'Pass into Danger%':
                     colors = cmap_invertida(data_color)
             else colors = cmap(data_color)
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
