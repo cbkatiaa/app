@@ -79,9 +79,10 @@ def iqindportero(df, j1, pos):
         cmap = LinearSegmentedColormap.from_list('rg', ["darkred", "red", "salmon", "yellowgreen", "green", "darkgreen"], N=256)
         cmap_invertida = LinearSegmentedColormap.from_list('rg', ["darkgreen", "green", "yellowgreen", "salmon", "red", "darkred"], N=256)
 
+        # Crear los colores para cada barra individualmente
         colors = []
-        for i, bar in enumerate(bar_data):
-            if bar == 'Pases hacia peligro %' or bar == 'Pass into Danger%':
+        for i, label in enumerate(df1['index']):
+            if label == 'Pases hacia peligro %':
                 colors.append(cmap_invertida(data_color[i]))
             else:
                 colors.append(cmap(data_color[i]))
@@ -90,7 +91,7 @@ def iqindportero(df, j1, pos):
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
         
         for c in ax.containers:
-            labels = [(y * 100).astype(int) if y > .05 else "" for y in c.datavalues]
+            labels = [(v * 100).astype(int) if v > .05 else "" for v in c.datavalues]
             ax.bar_label(c, labels=labels, label_type='edge', color='w', size=txs, fontweight='bold', padding=padr)
         for s in ['top', 'bottom', 'left', 'right']:
             ax.spines[s].set_visible(False)
@@ -107,6 +108,7 @@ def iqindportero(df, j1, pos):
     ax6.axis('off')
     ax7.set_title(ti7, color='black', size=22, x=0.05, y=1, ha='left', fontname='Century Gothic', fontweight='semibold')
     ax7.axis('off')
+
 
     j1 = j1.upper()
     pos = pos.upper()
