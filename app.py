@@ -9,7 +9,7 @@ import matplotlib as mp
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-def iqindportero(df, j1):
+def iqindportero(df, j1, pos):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
@@ -110,7 +110,7 @@ def iqindportero(df, j1):
 
     return fig
 
-def iqindcentral(df, j1):
+def iqindcentral(df, j1, pos):
     c='white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
