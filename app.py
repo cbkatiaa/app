@@ -128,8 +128,8 @@ def iqindcentral(df, j1):
                         wspace=0.05,
                         hspace=0.3)
 
-    bar1=['Presiones','Altura de presiones','Acciones agresivas', 'Recuperación tras presión %','Contrapresiones', 'Entradas','Éxito 1vs1 defensivo','Intercepciones']
-    bar2=['Despejes','Tiros bloqueados']
+    bar1=['Presiones', 'Recuperación tras presión %','Entradas','Éxito 1vs1 defensivo','Intercepciones']
+    bar2=['Despejes','Tiros bloqueados','Balones ganados área'-]
     bar3=['Duelos aéreos ganados', 'Éxito duelos aéreos']
     bar4=['Pases','% pases con zurdo','Éxito pases','Pases largos por pases','Progresiones al último tercio','Éxito pases largos','Éxito pases bajo presión','Distancia conducciones']
     bar5=['xG','Toques en el área']
@@ -215,7 +215,7 @@ def iqindcentral(df, j1):
     df['Despejes']=df['PAdj Clearances'].rank(pct=True)
     df['Intercepciones']=df['PAdj Interceptions'].rank(pct=True)
     df['Presiones']=df['PAdj Pressures'].rank(pct=True)
-    df['Altura de presiones']=df['Average Pressure X'].rank(pct=True)
+    #df['Altura de presiones']=df['Average Pressure X'].rank(pct=True)
     df['Entradas']=df['Tackles'].rank(pct=True)
     df['Entradas e Intercepciones p90']=df['Tack&Int'].rank(pct=True)
     df['Pases']=df['OP Passes'].rank(pct=True)
