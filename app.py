@@ -81,7 +81,7 @@ def iqindportero(df, j1, pos):
         for title in bar_data:
             if title == 'Pases hacia peligro %' or title == 'Pass into Danger%':
                     colors = cmap_invertida(data_color)
-            else colors = cmap(data_color)
+            else: colors = cmap(data_color)
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
         
         for c in ax.containers:
