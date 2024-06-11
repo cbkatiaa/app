@@ -32,7 +32,7 @@ def iqindportero(df, j1):
 
     c1 = 'white'
     txs = 22
-    padr = -45
+    padr = -45 
 
     fig.add_artist(lines.Line2D([.57, .57], [1, 0.1], color='#293A4A', lw=5))
     fig.add_artist(lines.Line2D([-.04, .57], [.76, 0.76], color='#293A4A', lw=5))
@@ -157,7 +157,7 @@ def iqindcentral(df, j1):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
-    # Crear métricas específicas para centrales
+
     df['Press %']=df['Pressure Regains']/df['Pressures']
     df['Éxito duelos aéreos']=df['Aerial Win%'].rank(pct=True)
     df['Duelos aéreos ganados']=df['Aerial Wins'].rank(pct=True)
@@ -277,7 +277,7 @@ def iqindcentral(df, j1):
         ax.set_xticks([0.5])
         ax.grid(color='grey', axis='x', which='major')
 
-    # Generar gráficos para cada categoría
+
     plot_bar(axs[0, 0], bar1, ti1)
     plot_bar(axs[0, 1], bar2, ti2)
     plot_bar(axs[0, 2], bar3, ti3)
@@ -288,24 +288,23 @@ def iqindcentral(df, j1):
 
     return fig
 
-# Título de la aplicación
+
 st.title('Análisis de Jugadores')
 
-# Autenticación con Google Sheets
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 client = gspread.authorize(creds)
 
-# Clave del archivo de Google Sheets
+
 file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 
-# Abre el archivo de Google Sheets y selecciona la hoja de cálculo
+
 sheet = client.open_by_key(file_key).sheet1
 
 # Convierte los datos de la hoja de cálculo en un DataFrame
 df = pd.DataFrame(sheet.get_all_records())
 
-# Continuación de la aplicación de Streamlit...
+
 temporadas = df['Season'].unique()
 posiciones = df['Primary Position'].unique()
 
@@ -318,21 +317,17 @@ df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Positio
 jugadores = df_filtrado['Name'].unique()
 jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
-# Diccionario que mapea cada posición a su función de gráficos correspondiente
+
 posicion_funciones = {
     "Goalkeeper": iqindportero,
     "Right Centre Back": iqindcentral,
     "Left Centre Back": iqindcentral,
     "Centre Back": iqindcentral
-    # Agrega aquí más posiciones y sus funciones según sea necesario
 }
 
-# Generar y mostrar el gráfico según la posición seleccionada
 if st.button("Generar Análisis"):
-    # Obtener la función de gráficos correspondiente desde el diccionario
     funcion_grafico = posicion_funciones.get(posicion_seleccionada)
     
-    # Si existe una función para la posición seleccionada, generar el gráfico
     if funcion_grafico:
         fig = funcion_grafico(df_filtrado, jugador_seleccionado)
         st.pyplot(fig)
