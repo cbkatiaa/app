@@ -325,10 +325,12 @@ df = pd.DataFrame(sheet.get_all_records())
 
 temporadas = df['Season'].unique()
 posiciones = df['Primary Position'].unique()
+equipos = df['Team'].unique()
 
 # Selección de temporada y posición
 temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
 posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
+equipo_seleccionado = st.selectbox("Selecciona el equipo", equipos)
 
 # Filtrado de datos según la temporada y posición seleccionadas
 df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
