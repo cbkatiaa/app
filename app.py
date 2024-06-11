@@ -147,7 +147,7 @@ def iqindcentral(df, j1):
 
     c1 = 'white'
     y1 = -3
-    #vmax = 4
+    vmax = 4
     txs = 18
     txs1 = 22
     padr = -40
@@ -251,7 +251,7 @@ def iqindcentral(df, j1):
     def plot_bar_central(ax, bar_data, title):
         ax.set_facecolor(c1)
         ax.set_xlim(0, 1)
-        ax.set_ylim(-1, 8)
+        ax.set_ylim(-1, len(bar_data))
         ax.set_xticklabels([])
         ax.yaxis.set_ticks_position('none')
 
