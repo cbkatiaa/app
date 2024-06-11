@@ -32,7 +32,7 @@ def iqindportero(df, j1, pos):
 
     c1 = 'white'
     txs = 22
-    padr = -45 
+    padr = -45
 
     fig.add_artist(lines.Line2D([.57, .57], [1, 0.1], color='#293A4A', lw=5))
     fig.add_artist(lines.Line2D([-.04, .57], [.76, 0.76], color='#293A4A', lw=5))
@@ -40,21 +40,20 @@ def iqindportero(df, j1, pos):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
-    df['Long balls total']=(df['Long Balls']/df['Long Ball%'])*100
-    df['Long balls per pass']=df['Long balls total']/df['OP Passes']
-    df['% pases son largos']=df['Long balls per pass'].rank(pct=True)
-    df['Goles parados']=df['GSAA'].rank(pct=True)
-    df['OBV portero']=df['Goalkeeper OBV'].rank(pct=True)
-    df['Salidas de libero del portero']=df['GK Aggressive Dist.'].rank(pct=True)
-    df['Salidas de portero (centros)']=df['Claims%'].rank(pct=True)
-    df['Pases hacia peligro %']=df['Pass into Danger%'].rank(pct=True)
-    df['Calidad de posicionamiento']=1-(df['Positioning Error'].rank(pct=True))
-    df['Pases']=df['OP Passes'].rank(pct=True)
-    df['Éxito pases largos']=df['Long Ball%'].rank(pct=True)
-    df['Éxito pases']=df['Passing%'].rank(pct=True)
-    df['Éxito pases bajo presión']=df['Pr. Pass%'].rank(pct=True)
-    df['% pases con zurdo']=df['L/R Footedness%']/100
-
+    df['Long balls total'] = (df['Long Balls'] / df['Long Ball%']) * 100
+    df['Long balls per pass'] = df['Long balls total'] / df['OP Passes']
+    df['% pases son largos'] = df['Long balls per pass'].rank(pct=True)
+    df['Goles parados'] = df['GSAA'].rank(pct=True)
+    df['OBV portero'] = df['Goalkeeper OBV'].rank(pct=True)
+    df['Salidas de libero del portero'] = df['GK Aggressive Dist.'].rank(pct=True)
+    df['Salidas de portero (centros)'] = df['Claims%'].rank(pct=True)
+    df['Pases hacia peligro %'] = df['Pass into Danger%'].rank(pct=True)
+    df['Calidad de posicionamiento'] = 1 - (df['Positioning Error'].rank(pct=True))
+    df['Pases'] = df['OP Passes'].rank(pct=True)
+    df['Éxito pases largos'] = df['Long Ball%'].rank(pct=True)
+    df['Éxito pases'] = df['Passing%'].rank(pct=True)
+    df['Éxito pases bajo presión'] = df['Pr. Pass%'].rank(pct=True)
+    df['% pases con zurdo'] = df['L/R Footedness%'] / 100
 
     df = df.loc[df['Name'] == j1]
     df = df.set_index('Name')
@@ -110,6 +109,7 @@ def iqindportero(df, j1, pos):
     plt.figtext(0.05, 0.94, pos, c='#151616', fontsize=40, fontweight='bold', fontname='arial')
 
     return fig
+
 
 def iqindcentral(df, j1, pos):
     c='white'
