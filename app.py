@@ -147,6 +147,7 @@ def iqindcentral(df, j1):
 
     c1 = 'white'
     y1 = -3
+    vmax = 4
     txs = 18
     txs1 = 22
     padr = -40
@@ -250,7 +251,7 @@ def iqindcentral(df, j1):
     def plot_bar_central(ax, bar_data, title):
         ax.set_facecolor(c1)
         ax.set_xlim(0, 1)
-        ax.set_ylim(-1, len(bar_data))
+        ax.set_ylim(-1, 8)
         ax.set_xticklabels([])
         ax.yaxis.set_ticks_position('none')
 
@@ -264,11 +265,11 @@ def iqindcentral(df, j1):
         colors = [cmap(val) for val in data_color]
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
         
-        for container in ax.containers:
+        for c in ax.containers:
             labels = [(val * 100).astype(int) if val > .05 else "" for val in container.datavalues]
             ax.bar_label(container, labels=labels, label_type='edge', color='w', size=txs, fontweight='bold', padding=padr)
 
-        for spine in ['top', 'bottom', 'left', 'right']:
+        for s in ['top', 'bottom', 'left', 'right']:
             ax.spines[spine].set_visible(False)
 
         ax.set_yticklabels(df1['index'], color='black', size=20, fontname='Century Gothic', va='center')
