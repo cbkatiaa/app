@@ -265,11 +265,11 @@ def iqindcentral(df, j1):
         colors = [cmap(val) for val in data_color]
         ax.barh(x, y, color=colors, zorder=2, edgecolor='none')
         
-        for c in ax.containers:
+        for container in ax.containers:
             labels = [(val * 100).astype(int) if val > .05 else "" for val in container.datavalues]
             ax.bar_label(container, labels=labels, label_type='edge', color='w', size=txs, fontweight='bold', padding=padr)
 
-        for s in ['top', 'bottom', 'left', 'right']:
+        for spine in ['top', 'bottom', 'left', 'right']:
             ax.spines[spine].set_visible(False)
 
         ax.set_yticklabels(df1['index'], color='black', size=20, fontname='Century Gothic', va='center')
