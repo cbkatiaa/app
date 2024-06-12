@@ -276,8 +276,8 @@ def iqindcentral(df, j1, pos):
         ax.set_xticklabels([])
         ax.yaxis.set_ticks_position('none')
 
-        ax.text(0,y1, t2, size=txs1, c='black', fontweight='semibold')
-        ax.text(0,y1, t3, size=txs1, c='black', fontweight='semibold')
+        ax1.text(0,y1, t2, size=txs1, c='black', fontweight='semibold')
+        ax1.text(0,y1, t3, size=txs1, c='black', fontweight='semibold')
 
         df1 = df.reindex(bar_data).reindex(index=bar_data[::-1]).reset_index()
         x = df1['index']
