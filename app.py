@@ -8,7 +8,7 @@ from matplotlib.colors import LinearSegmentedColormap
 import matplotlib as mp
 import matplotlib.image as mpimg
 import os
-from google.colab import drive
+#from google.colab import drive
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
