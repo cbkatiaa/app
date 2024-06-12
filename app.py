@@ -311,11 +311,6 @@ def iqindcentral(df, j1, pos):
     plot_bar_central(ax4, bar4, ti4)
     plot_bar_central(ax5, bar5, ti5)
 
-    ax1.set_yticklabels('', color='black', size=20, fontname='Century Gothic', va='center')
-    ax1.yaxis.set_tick_params(pad = 15)
-    ax1.set_xticks([])
-    ax1.grid(color='grey', axis='x', which='major', zorder=3)
-    ax1.text(0,y1, t2, size=txs1, c='black', fontweight='semibold')
 
 
     j1 = j1.upper()
