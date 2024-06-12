@@ -12,7 +12,7 @@ import os
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-def iqindportero(df, j1, pos, images_folder):
+def iqindportero(df, j1, pos):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
