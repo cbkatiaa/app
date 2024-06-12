@@ -12,7 +12,7 @@ from google.colab import drive
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-def iqindportero(df, j1, pos):
+def iqindportero(df, j1, pos, images_folder):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
@@ -114,6 +114,13 @@ def iqindportero(df, j1, pos):
     pos = pos.upper()
     plt.figtext(0.05, 0.98, j1, c='#151616', fontsize=56, fontweight='bold', fontname='arial')
     plt.figtext(0.05, 0.94, pos, c='#151616', fontsize=40, fontweight='bold', fontname='arial')
+
+    # Carga de la imagen desde Google Drive
+    img_path = os.path.join(images_folder, f"{j1}.jpg")
+    img = mpimg.imread(img_path)
+
+    # Agregar la imagen a la figura
+    ax0.imshow(img, aspect='auto', extent=(0.65, 0.95, 0.55, 0.85))
 
     return fig
 
