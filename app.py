@@ -527,11 +527,11 @@ def iqindlateral(df, j1, pos):
     ax1.text(0, y1, t3, size=txs1, c='black', fontweight='semibold')
 
 
-    plot_bar_central(ax1, bar1, ti1)
-    plot_bar_central(ax2, bar2, ti2)
-    plot_bar_central(ax3, bar3, ti3)
-    plot_bar_central(ax4, bar4, ti4)
-    plot_bar_central(ax5, bar5, ti5)
+    plot_bar_lateral(ax1, bar1, ti1)
+    plot_bar_lateral(ax2, bar2, ti2)
+    plot_bar_lateral(ax3, bar3, ti3)
+    plot_bar_lateral(ax4, bar4, ti4)
+    plot_bar_lateral(ax5, bar5, ti5)
 
 
 
