@@ -311,8 +311,6 @@ def iqindcentral(df, j1, pos):
     plot_bar_central(ax4, bar4, ti4)
     plot_bar_central(ax5, bar5, ti5)
 
-    plt.figtext(0.2, 0.45, t3, c='black', fontsize=txs1, fontweight='semibold', fontname='Century Gothic')
-
 
     j1 = j1.upper()
     pos = pos.upper()
