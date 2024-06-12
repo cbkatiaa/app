@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib import lines
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib as mp
+import matplotlib.image as mpimg
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
