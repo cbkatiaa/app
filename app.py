@@ -60,6 +60,11 @@ def iqindportero(df, j1, pos):
     df = df.transpose()
 
     ax0.axis('off')
+    ax1.axis('off')
+    ax6.axis('off')
+    ax7.axis('off')
+    ax2.axis('off')
+    
 
     def plot_bar_portero(ax, bar_data, title):
         ax.set_facecolor(c1)
