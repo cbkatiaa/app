@@ -304,6 +304,12 @@ def iqindcentral(df, j1, pos):
     ax1.grid(color='grey', axis='x', which='major', zorder=3)
     ax1.text(0, y1, ti1, size=txs1, c='black', fontweight='semibold')
 
+    ax1.set_yticklabels('', color='black', size=20, fontname='Century Gothic', va='center')
+    ax1.yaxis.set_tick_params(pad=15)
+    ax1.set_xticks([])
+    ax1.grid(color='grey', axis='x', which='major', zorder=3)
+    ax1.text(0, y1, t2, size=txs1, c='black', fontweight='semibold') 
+
 
     plot_bar_central(ax1, bar1, ti1)
     plot_bar_central(ax2, bar2, ti2)
