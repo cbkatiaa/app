@@ -1234,7 +1234,7 @@ posicion_funciones = {
     "Centre Attacking Midfielder": iqindvolante,
     "Right Attacking Midfielder": iqindvolante,
     "Secondary Striker": iqindvolante,
-    "Left Centre Forward2: iqinddelantero,
+    "Left Centre Forward": iqinddelantero,
     "Centre Forward": iqinddelantero,
     "Right Centre Forward": iqinddelantero
 }
