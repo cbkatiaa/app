@@ -12,7 +12,7 @@ import os
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-def iqindportero(df_porteros, j1, pos):
+def iqindportero(df, j1, pos):
     c = 'white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
@@ -43,7 +43,7 @@ def iqindportero(df_porteros, j1, pos):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
-    df_porteros['Long balls total'] = (df_porteros['Long Balls'] / df['Long Ball%']) * 100
+    df['Long balls total'] = (df['Long Balls'] / df['Long Ball%']) * 100
     df['Long balls per pass'] = df['Long balls total'] / df['OP Passes']
     df['% pases son largos'] = df['Long balls per pass'].rank(pct=True)
     df['Goles parados'] = df['GSAA'].rank(pct=True)
