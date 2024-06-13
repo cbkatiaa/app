@@ -1197,7 +1197,7 @@ sheet = client.open_by_key(file_key).sheet1
 df = pd.DataFrame(sheet.get_all_records())
 
 
-temporadas = df_porteros['Season'].unique()
+temporadas = df['Season'].unique()
 posiciones = df['Primary Position'].unique()
 #equipos = df['Team'].unique()
 
