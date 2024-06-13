@@ -43,24 +43,24 @@ def iqindportero(df, j1, pos):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
-    df['Long balls total'] = (df.groupby('Primary Position')['Long Balls'] / df.groupby('Primary Position')['Long Ball%']) * 100
-    df['Long balls per pass'] = df.groupby('Primary Position')['Long balls total'] / df.groupby('Primary Position')['OP Passes']
-    df['% pases son largos'] = df.groupby('Primary Position')['Long balls per pass'].rank(pct=True)
-    df['Goles parados'] = df.groupby('Primary Position')['GSAA'].rank(pct=True)
-    df['OBV portero'] = df.groupby('Primary Position')['Goalkeeper OBV'].rank(pct=True)
-    df['Salidas de libero del portero'] = df.groupby('Primary Position')['GK Aggressive Dist.'].rank(pct=True)
-    df['Salidas de portero (centros)'] = df.groupby('Primary Position')['Claims%'].rank(pct=True)
-    df['Pases hacia peligro %'] = df.groupby('Primary Position')['Pass into Danger%'].rank(pct=True)
-    df['Calidad de posicionamiento'] = 1 - (df.groupby('Primary Position')['Positioning Error'].rank(pct=True))
-    df['Pases'] = df.groupby('Primary Position')['OP Passes'].rank(pct=True)
-    df['Éxito pases largos'] = df.groupby('Primary Position')['Long Ball%'].rank(pct=True)
-    df['Éxito pases'] = df.groupby('Primary Position')['Passing%'].rank(pct=True)
-    df['Éxito pases bajo presión'] = df.groupby('Primary Position')['Pr. Pass%'].rank(pct=True)
-    df['% pases con zurdo'] = df.groupby('Primary Position')['L/R Footedness%'] / 100
+    df_porteros['Long balls total'] = (df_porteros['Long Balls'] / df_porteros['Long Ball%']) * 100
+    df_porteros['Long balls per pass'] = df_porteros['Long balls total'] / df_porteros['OP Passes']
+    df_porteros['% pases son largos'] = df_porteros['Long balls per pass'].rank(pct=True)
+    df_porteros['Goles parados'] = df_porteros['GSAA'].rank(pct=True)
+    df_porteros['OBV portero'] = df_porteros['Goalkeeper OBV'].rank(pct=True)
+    df_porteros['Salidas de libero del portero'] = df_porteros['GK Aggressive Dist.'].rank(pct=True)
+    df_porteros['Salidas de portero (centros)'] = df_porteros['Claims%'].rank(pct=True)
+    df_porteros['Pases hacia peligro %'] = df_porteros['Pass into Danger%'].rank(pct=True)
+    df_porteros['Calidad de posicionamiento'] = 1 - (df_porteros['Positioning Error'].rank(pct=True))
+    df_porteros['Pases'] = df_porteros['OP Passes'].rank(pct=True)
+    df_porteros['Éxito pases largos'] = df_porteros['Long Ball%'].rank(pct=True)
+    df_porteros['Éxito pases'] = df_porteros['Passing%'].rank(pct=True)
+    df_porteros['Éxito pases bajo presión'] = df_porteros['Pr. Pass%'].rank(pct=True)
+    df_porteros['% pases con zurdo'] = df_porteros['L/R Footedness%'] / 100
 
-    df = df.loc[df['Name'] == j1]
-    df = df.set_index('Name')
-    df = df.transpose()
+    df_porteros = df_porteros.loc[df_porteros['Name'] == j1]
+    df_porteros = df_porteros.set_index('Name')
+    df_porteros = df_porteros.transpose()
 
     ax0.axis('off')
 
