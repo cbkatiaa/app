@@ -1194,7 +1194,7 @@ sheet = client.open_by_key(file_key).sheet1
 
 
 # Convierte los datos de la hoja de cálculo en un DataFrame
-df_porteros = pd.DataFrame(sheet.get_all_records())
+df = pd.DataFrame(sheet.get_all_records())
 
 
 temporadas = df_porteros['Season'].unique()
