@@ -1023,7 +1023,7 @@ def iqinddelantero(df, j1, pos):
 
 
     df['Press %']=df['Pressure Regains']/df['Pressures']
-    df['Éxito duelos aéreos']=df['Aerial Win%'].rank(pct=True)
+    df['Éxito duelos aéreos']=df.groupby("Pr['Aerial Win%'].rank(pct=True)
     df['Duelos aéreos ganados']=df['Aerial Wins'].rank(pct=True)
     df['Acciones agresivas']=df['Aggressive Actions'].rank(pct=True)
     df['Asistencias Torneo']=df['Assists'].rank(pct=True)
@@ -1207,10 +1207,32 @@ posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
 #equipo_seleccionado = st.selectbox("Selecciona el equipo", equipos)
 
 # Filtrado de datos según la temporada y posición seleccionadas (& (df['Team'] == equipo_seleccionado))
-df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
-jugadores = df_filtrado['Name'].unique()
-jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
+#df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
+#jugadores = df_filtrado['Name'].unique()
+#jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
+if posicion_seleccionada == 'Portero':
+    df_filtrado = df_porteros[df_porteros['Season'] == temporada_seleccionada]
+elif posicion_seleccionada in ['Right Centre Back', 'Left Centre Back', 'Centre Back']:
+    df_filtrado = df_centrales[df_centrales['Season'] == temporada_seleccionada]
+elif posicion_seleccionada in ['Left Back', 'Left Wing Back', 'Right Back', 'Right Wing Back']:
+    df_filtrado = df_laterales[df_laterales['Season'] == temporada_seleccionada]
+elif posicion_seleccionada in ['Left Defensive Midfielder', 'Centre Defensive Midfielder', 'Right Defensive Midfielder',
+                               'Left Centre Midfielder', 'Centre Midfielder', 'Right Centre Midfielder']:
+    df_filtrado = df_contenciones[df_contenciones['Season'] == temporada_seleccionada]
+elif posicion_seleccionada in ['Left Midfielder', 'Left Wing', 'Right Midfielder', 'Right Wing',
+                               'Left Attacking Midfielder', 'Centre Attacking Midfielder', 'Right Attacking Midfielder',
+                               'Secondary Striker']:
+    df_filtrado = df_volante[df_volante['Season'] == temporada_seleccionada]
+elif posicion_seleccionada in ['Left Centre Forward', 'Centre Forward', 'Right Centre Forward']:
+    df_filtrado = df_delanteros[df_delanteros['Season'] == temporada_seleccionada]
+else:
+    st.error(f"No hay datos para la posición seleccionada: {posicion_seleccionada}")
+
+# Filtrar jugadores y seleccionar uno
+if 'df_filtrado' in locals():
+    jugadores = df_filtrado['Name'].unique()
+    jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
 posicion_funciones = {
     "Portero": iqindportero,
