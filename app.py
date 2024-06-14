@@ -1023,7 +1023,7 @@ def iqinddelantero(df, j1, pos):
 
 
     df['Press %']=df['Pressure Regains']/df['Pressures']
-    df['Éxito duelos aéreos']=df.groupby("Pr['Aerial Win%'].rank(pct=True)
+    df['Éxito duelos aéreos']=['Aerial Win%'].rank(pct=True)
     df['Duelos aéreos ganados']=df['Aerial Wins'].rank(pct=True)
     df['Acciones agresivas']=df['Aggressive Actions'].rank(pct=True)
     df['Asistencias Torneo']=df['Assists'].rank(pct=True)
