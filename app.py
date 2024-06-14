@@ -1187,15 +1187,48 @@ creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', sco
 client = gspread.authorize(creds)
 
 
+#file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
+sheet_names = {
+    'Portero': 'porteros',
+    'Central': 'centrales',
+    'Lateral': 'laterales',
+    'Contención': 'contenciones',
+    'Volante': 'volantes',
+    'Delantero': 'delanteros'
+}
 
-
-sheet = client.open_by_key(file_key).sheet1
+#sheet = client.open_by_key(file_key).sheet1
 
 
 # Convierte los datos de la hoja de cálculo en un DataFrame
-df = pd.DataFrame(sheet.get_all_records())
+#df = pd.DataFrame(sheet.get_all_records())
 
+def get_dataframe_by_position(position):
+    sheet_name = sheet_names[position]  # Obtener el nombre de la hoja correspondiente
+    workbook = client.open_by_key(file_key)
+    worksheet = workbook.worksheet(sheet_name)
+    
+    # Obtener todos los registros de la hoja y convertirlos a DataFrame
+    df = pd.DataFrame(worksheet.get_all_records())
+    return df
+
+# Ejemplo de cómo obtener el DataFrame para cada posición
+df_porteros = get_dataframe_by_position('Portero')
+df_centrales = get_dataframe_by_position('Central')
+df_laterales = get_dataframe_by_position('Lateral')
+df_contenciones = get_dataframe_by_position('Contención')
+df_volantes = get_dataframe_by_position('Volante')
+df_delanteros = get_dataframe_by_position('Delantero')
+
+df_posiciones = {
+    'Portero': df_porteros,
+    'Central': df_centrales,
+    'Lateral': df_laterales,
+    'Contención': df_contenciones,
+    'Volante': df_volantes,
+    'Delantero': df_delanteros
+}
 
 temporadas = df['Season'].unique()
 posiciones = df['Primary Position'].unique()
