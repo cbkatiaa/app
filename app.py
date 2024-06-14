@@ -1269,30 +1269,12 @@ if 'df_filtrado' in locals():
 
 posicion_funciones = {
     "Portero": iqindportero,
-    "Right Centre Back": iqindcentral,
-    "Left Centre Back": iqindcentral,
-    "Centre Back": iqindcentral,
-    "Left Back": iqindlateral,
-    "Left Wing Back": iqindlateral,
-    "Right Back": iqindlateral,
-    "Right Wing Back": iqindlateral,
-    "Left Defensive Midfielder": iqindcontencion,
-    "Centre Defensive Midfielder": iqindcontencion,
-    "Right Defensive Midfielder": iqindcontencion,
-    "Left Centre Midfielder": iqindcontencion,
-    "Centre Midfielder": iqindcontencion,
-    "Right Centre Midfielder": iqindcontencion,
-    "Left Midfielder": iqindvolante,
-    "Left Wing": iqindvolante,
-    "Right Midfielder": iqindvolante,
-    "Right Wing": iqindvolante,
-    "Left Attacking Midfielder": iqindvolante,
-    "Centre Attacking Midfielder": iqindvolante,
-    "Right Attacking Midfielder": iqindvolante,
-    "Secondary Striker": iqindvolante,
-    "Left Centre Forward": iqinddelantero,
-    "Centre Forward": iqinddelantero,
-    "Right Centre Forward": iqinddelantero
+    "Central": iqindcentral,
+    "Lateral": iqindlateral,
+    "Contención": iqindcontencion,
+    "Extremo": iqindvolante,
+    "Mediapunta": iqindvolante,
+    "Delantero": iqinddelantero
 }
 
 if st.button("Generar Análisis"):
