@@ -528,8 +528,8 @@ def iqindlateral(df, j1, pos):
     ax1.grid(color='grey', axis='x', which='major', zorder=3)
     ax1.text(0, y1, t3, size=txs1, c='black', fontweight='semibold')
 
-    plot_bar_central(ax8, ['Presiones'], t3)
-    plot_bar_central(ax6, ['Pases'], t2)
+    plot_bar_lateral(ax8, ['Presiones'], t3)
+    plot_bar_lateral(ax6, ['Pases'], t2)
 
     plot_bar_lateral(ax1, bar1, ti1)
     plot_bar_lateral(ax2, bar2, ti2)
@@ -742,8 +742,8 @@ def iqindcontencion(df, j1, pos):
     ax1.grid(color='grey', axis='x', which='major', zorder=3)
     ax1.text(0, y1, t3, size=txs1, c='black', fontweight='semibold')
 
-    plot_bar_central(ax8, ['Presiones'], t3)
-    plot_bar_central(ax6, ['Pases'], t2)
+    plot_bar_contencion(ax8, ['Presiones'], t3)
+    plot_bar_contencion(ax6, ['Pases'], t2)
 
 
     plot_bar_contencion(ax1, bar1, ti1)
@@ -958,8 +958,8 @@ def iqindvolante(df, j1, pos):
     ax1.grid(color='grey', axis='x', which='major', zorder=3)
     ax1.text(0, y1, t3, size=txs1, c='black', fontweight='semibold')
 
-    plot_bar_central(ax8, ['Presiones'], t3)
-    plot_bar_central(ax6, ['Pases'], t2)
+    plot_bar_volante(ax8, ['Presiones'], t3)
+    plot_bar_volante(ax6, ['Pases'], t2)
 
 
     plot_bar_volante(ax1, bar1, ti1)
@@ -1187,8 +1187,8 @@ def iqinddelantero(df, j1, pos):
     ax1.grid(color='grey', axis='x', which='major', zorder=3)
     ax1.text(0, y1, t3, size=txs1, c='black', fontweight='semibold')
 
-    plot_bar_central(ax8, ['Presiones'], t3)
-    plot_bar_central(ax6, ['Pases'], t2)
+    plot_bar_delantero(ax8, ['Presiones'], t3)
+    plot_bar_delantero(ax6, ['Pases'], t2)
 
 
     plot_bar_delantero(ax1, bar1, ti1)
