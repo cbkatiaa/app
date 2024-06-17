@@ -313,9 +313,12 @@ def iqindcentral(df, j1, pos):
     ax1.grid(color='grey', axis='x', which='major', zorder=3)
     ax1.text(0, y1, t3, size=txs1, c='black', fontweight='semibold')
 
+    plot_bar_central(ax8, ['Presiones'], ti1)
+
+    # Configuración para "Pases"
+    plot_bar_central(ax6, ['Pases'], t3)
+
  
-
-
     plot_bar_central(ax1, bar1, ti1)
     plot_bar_central(ax2, bar2, ti2)
     plot_bar_central(ax3, bar3, ti3)
@@ -328,41 +331,7 @@ def iqindcentral(df, j1, pos):
     plt.figtext(0.05, 0.98, j1, c='#151616', fontsize=56, fontweight='bold', fontname='arial')
     plt.figtext(0.05, 0.94, pos, c='#151616', fontsize=40, fontweight='bold', fontname='arial')
 
-    ax1 = ax8
-    ax1.set_facecolor(c1)
-    ax1.set_xlim(-0.2, 1.2)
-    ax1.set_xticklabels([])
-    ax1.yaxis.set_ticks_position('none') 
-    df = df.reindex(['Presiones'])
-    df = df.reindex(index=df.index[::-1])
-    df = df.reset_index()
-    x = df['index']
-    y = df[j1]
-    z = y.values
-    norm = mp.colors.Normalize(vmin=0, vmax=1)
-    data_color = y
-    normmin = 0
-    normmax = 1
-    data_color = [(x - normmin) / (normmax - normmin) for x in data_color]
-
-    ax1 = ax6
-    ax1.set_facecolor(c1)
-    ax1.set_xlim(-0.2, 1.2)
-    ax1.set_xticklabels([])
-    ax1.yaxis.set_ticks_position('none') 
-    df = df.reindex(['Pases'])
-    df = df.reindex(index=df.index[::-1])
-    df = df.reset_index()
-    x = df['index']
-    y = df[j1]
-    z = y.values
-    norm = mp.colors.Normalize(vmin=0, vmax=1)
-    data_color = y
-    normmin = 0
-    normmax = 1
-    data_color = [(x - normmin) / (normmax - normmin) for x in data_color]
-
-
+    
     return fig
 
 def iqindlateral(df, j1, pos):
