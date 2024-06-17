@@ -260,39 +260,7 @@ def iqindcentral(df, j1, pos):
 
     df = df.loc[df['Name'] == j1]
     df = df.set_index('Name').transpose()
-    ax1=ax8
-    ax1.set_facecolor(c1)
-    ax1.set_xlim(-0.2,1.2)
-    ax1.set_xticklabels([])
-    ax1.yaxis.set_ticks_position('none') 
-    df=df.reindex(['Presiones'])
-    df=df.reindex(index=df.index[::-1])
-    df=df.reset_index()
-    x=df['index']
-    y=df[j1]
-    z=y.values
-    norm = mp.colors.Normalize(vmin=0, vmax=1)
-    data_color = y
-    normmin=0
-    normmax=1
-    data_color = [(x-normmin) / (normmax-normmin) for x in data_color]
-
-    ax1=ax6
-    ax1.set_facecolor(c1)
-    ax1.set_xlim(-0.2,1.2)
-    ax1.set_xticklabels([])
-    ax1.yaxis.set_ticks_position('none') 
-    df=df.reindex(['Pases'])
-    df=df.reindex(index=df.index[::-1])
-    df=df.reset_index()
-    x=df['index']
-    y=df[j1]
-    z=y.values
-    norm = mp.colors.Normalize(vmin=0, vmax=1)
-    data_color = y
-    normmin=0
-    normmax=1
-    data_color = [(x-normmin) / (normmax-normmin) for x in data_color]
+   
 
     ax0.axis('off')
     ax6.axis('off')
