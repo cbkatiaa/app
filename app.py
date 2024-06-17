@@ -1210,19 +1210,31 @@ temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
 posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
 #equipo_seleccionado = st.selectbox("Selecciona el equipo", equipos)
 
-# Filtrado de datos según la temporada y posición seleccionadas (& (df['Team'] == equipo_seleccionado))
 df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
 jugadores = df_filtrado['Name'].unique()
 jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
-
+posicion_funciones = {
+"Portero": iqindportero,
+"Central": iqindcentral,
+"Lateral": iqindlateral,
+"Contención": iqindcontecion,
+"Volante": iqindvolante,
+"Mediapunta": iqindvolante,
+"Delantero": iqinddelantero
+}
 
 if st.button("Generar Análisis"):
-    funcion_grafico = posicion_funciones.get(posicion_seleccionada)
-    
+funcion_grafico = posicion_funciones.get(posicion_seleccionada)
     if funcion_grafico:
         fig = funcion_grafico(df_filtrado, jugador_seleccionado, posicion_seleccionada)
         st.pyplot(fig)
     else:
         st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
+
+# Filtrado de datos según la temporada y posición seleccionadas (& (df['Team'] == equipo_seleccionado))
+#df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
+#jugadores = df_filtrado['Name'].unique()
+#jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
+
 
