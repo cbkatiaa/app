@@ -141,7 +141,6 @@ def iqindcentral(df, j1, pos):
                         wspace=0.05,
                         hspace=0.3)
 
-    df_grouped = df.groupby('Primary Position').transform(lambda x: x.rank(pct=True))
 
     bar1=['Presiones', 'Recuperación tras presión %','Entradas','Éxito 1vs1 defensivo','Intercepciones']
     bar2=['Despejes','Tiros bloqueados','Balones recuperados']
@@ -175,7 +174,7 @@ def iqindcentral(df, j1, pos):
     plt.rcParams["font.family"] = "Century Gothic"
 
 
-    df['Press %']=df['Pressure Regains']/df['Pressures']
+    df['Press %']=df[df['Primary Position'] == 'Central']['Pressure Regains']/df[df['Primary Position'] == 'Central']['Pressures']
     df['Éxito duelos aéreos']=df['Aerial Win%'].rank(pct=True)
     df['Duelos aéreos ganados']=df['Aerial Wins'].rank(pct=True)
     df['Acciones agresivas']=df['Aggressive Actions'].rank(pct=True)
