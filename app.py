@@ -43,24 +43,25 @@ def iqindportero(df, j1, pos):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
-    df_porteros['Long balls total'] = (df_porteros['Long Balls'] / df_porteros['Long Ball%']) * 100
-    df_porteros['Long balls per pass'] = df_porteros['Long balls total'] / df_porteros['OP Passes']
-    df_porteros['% pases son largos'] = df_porteros['Long balls per pass'].rank(pct=True)
-    df_porteros['Goles parados'] = df_porteros['GSAA'].rank(pct=True)
-    df_porteros['OBV portero'] = df_porteros['Goalkeeper OBV'].rank(pct=True)
-    df_porteros['Salidas de libero del portero'] = df_porteros['GK Aggressive Dist.'].rank(pct=True)
-    df_porteros['Salidas de portero (centros)'] = df_porteros['Claims%'].rank(pct=True)
-    df_porteros['Pases hacia peligro %'] = df_porteros['Pass into Danger%'].rank(pct=True)
-    df_porteros['Calidad de posicionamiento'] = 1 - (df_porteros['Positioning Error'].rank(pct=True))
-    df_porteros['Pases'] = df_porteros['OP Passes'].rank(pct=True)
-    df_porteros['Éxito pases largos'] = df_porteros['Long Ball%'].rank(pct=True)
-    df_porteros['Éxito pases'] = df_porteros['Passing%'].rank(pct=True)
-    df_porteros['Éxito pases bajo presión'] = df_porteros['Pr. Pass%'].rank(pct=True)
-    df_porteros['% pases con zurdo'] = df_porteros['L/R Footedness%'] / 100
+    df['Long balls total']=(df['Long Balls']/df['Long Ball%'])*100
+    df['Long balls per pass']=df['Long balls total']/df['OP Passes']
+    df['% pases son largos']=df['Long balls per pass'].rank(pct=True)
+    df['Goles parados']=df['GSAA'].rank(pct=True)
+    df['OBV portero']=df['Goalkeeper OBV'].rank(pct=True)
+    df['Salidas de libero del portero']=df['GK Aggressive Dist.'].rank(pct=True)
+    df['Salidas de portero (centros)']=df['Claims%'].rank(pct=True)
+    df['Pases hacia peligro %']=df['Pass into Danger%'].rank(pct=True)
+    df['Calidad de posicionamiento']=1-(df['Positioning Error'].rank(pct=True))
+    df['Pases']=df['OP Passes'].rank(pct=True)
+    df['Éxito pases largos']=df['Long Ball%'].rank(pct=True)
+    df['Éxito pases']=df['Passing%'].rank(pct=True)
+    df['Éxito pases bajo presión']=df['Pr. Pass%'].rank(pct=True)
+    df['% pases con zurdo']=df['L/R Footedness%']/100
 
-    df_porteros = df_porteros.loc[df_porteros['Name'] == j1]
-    df_porteros = df_porteros.set_index('Name')
-    df_porteros = df_porteros.transpose()
+
+    dff=df.loc[df['Name']==j1]
+    df=df.set_index('Name')
+    df=df.transpose()
 
     ax0.axis('off')
 
@@ -1187,69 +1188,34 @@ creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', sco
 client = gspread.authorize(creds)
 
 
-#file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
-sheet_names = {
-    'Portero': 'porteros',
-    'Central': 'centrales',
-    'Lateral': 'laterales',
-    'Contención': 'contenciones',
-    'Volante': 'volantes',
-    'Delantero': 'delanteros'
-}
 
-#sheet = client.open_by_key(file_key).sheet1
+
+sheet = client.open_by_key(file_key).sheet1
 
 
 # Convierte los datos de la hoja de cálculo en un DataFrame
-#df = pd.DataFrame(sheet.get_all_records())
+df = pd.DataFrame(sheet.get_all_records())
 
-def get_dataframe_by_position(position):
-    sheet_name = sheet_names[position]  # Obtener el nombre de la hoja correspondiente
-    workbook = client.open_by_key(file_key)
-    worksheet = workbook.worksheet(sheet_name)
-    
-    # Obtener todos los registros de la hoja y convertirlos a DataFrame
-    df = pd.DataFrame(worksheet.get_all_records())
-    return df
 
-temporadas = []
-posiciones = list(sheet_names.keys())
 
+
+
+temporadas = df['Season'].unique()
+posiciones = df['Primary Position'].unique()
+#equipos = df['Team'].unique()
+
+# Selección de temporada y posición
 temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
 posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
+#equipo_seleccionado = st.selectbox("Selecciona el equipo", equipos)
 
-df_filtrado = get_dataframe_by_position(posicion_seleccionada)
-df_filtrado = df_filtrado[df_filtrado['Season'] == temporada_seleccionada]
-
+# Filtrado de datos según la temporada y posición seleccionadas (& (df['Team'] == equipo_seleccionado))
+df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
 jugadores = df_filtrado['Name'].unique()
 jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
 
-#temporadas = df['Season'].unique()
-#posiciones = df['Primary Position'].unique()
-#equipos = df['Team'].unique()
-
-# Selección de temporada y posición
-#temporada_seleccionada = st.selectbox("Selecciona la temporada", temporadas)
-#posicion_seleccionada = st.selectbox("Selecciona la posición", posiciones)
-#equipo_seleccionado = st.selectbox("Selecciona el equipo", equipos)
-
-# Filtrado de datos según la temporada y posición seleccionadas (& (df['Team'] == equipo_seleccionado))
-#df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
-#jugadores = df_filtrado['Name'].unique()
-#jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
-
-
-posicion_funciones = {
-    "Portero": iqindportero,
-    "Central": iqindcentral,
-    "Lateral": iqindlateral,
-    "Contención": iqindcontencion,
-    "Extremo": iqindvolante,
-    "Mediapunta": iqindvolante,
-    "Delantero": iqinddelantero
-}
 
 if st.button("Generar Análisis"):
     funcion_grafico = posicion_funciones.get(posicion_seleccionada)
