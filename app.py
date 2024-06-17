@@ -1225,7 +1225,7 @@ posicion_funciones = {
 }
 
 if st.button("Generar Análisis"):
-funcion_grafico = posicion_funciones.get(posicion_seleccionada)
+    funcion_grafico = posicion_funciones.get(posicion_seleccionada)
     if funcion_grafico:
         fig = funcion_grafico(df_filtrado, jugador_seleccionado, posicion_seleccionada)
         st.pyplot(fig)
