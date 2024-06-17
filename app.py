@@ -141,7 +141,7 @@ def iqindcentral(df, j1, pos):
                         wspace=0.05,
                         hspace=0.3)
 
-    df_grouped = df.groupby('Primary Position').transform(lambda x: x.rank(pct=True))
+    df = df.groupby('Primary Position').transform(lambda x: x.rank(pct=True))
 
     bar1=['Presiones', 'Recuperación tras presión %','Entradas','Éxito 1vs1 defensivo','Intercepciones']
     bar2=['Despejes','Tiros bloqueados','Balones recuperados']
