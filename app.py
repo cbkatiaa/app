@@ -277,8 +277,6 @@ def iqindcentral(df, j1, pos):
     normmax=1
     data_color = [(x-normmin) / (normmax-normmin) for x in data_color]
 
-    df1=df1.set_index('Name')
-    df1=df1.transpose()
     ax1=ax6
     ax1.set_facecolor(c1)
     ax1.set_xlim(-0.2,1.2)
@@ -359,8 +357,6 @@ def iqindcentral(df, j1, pos):
     pos = pos.upper()
     plt.figtext(0.05, 0.98, j1, c='#151616', fontsize=56, fontweight='bold', fontname='arial')
     plt.figtext(0.05, 0.94, pos, c='#151616', fontsize=40, fontweight='bold', fontname='arial')
-
-    
 
 
     return fig
