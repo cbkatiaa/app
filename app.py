@@ -1218,7 +1218,7 @@ posicion_funciones = {
 "Portero": iqindportero,
 "Central": iqindcentral,
 "Lateral": iqindlateral,
-"Contención": iqindcontecion,
+"Contención": iqindcontencion,
 "Volante": iqindvolante,
 "Mediapunta": iqindvolante,
 "Delantero": iqinddelantero
