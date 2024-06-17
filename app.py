@@ -284,11 +284,11 @@ def iqindcentral(df, j1, pos):
     ax1.set_xlim(-0.2,1.2)
     ax1.set_xticklabels([])
     ax1.yaxis.set_ticks_position('none') 
-    df1=df1.reindex(['Pases'])
-    df1=df1.reindex(index=df1.index[::-1])
-    df1=df1.reset_index()
-    x=df1['index']
-    y=df1[j1]
+    df=df.reindex(['Pases'])
+    df=df.reindex(index=df1.index[::-1])
+    df=df.reset_index()
+    x=df['index']
+    y=df[j1]
     z=y.values
     norm = mp.colors.Normalize(vmin=0, vmax=1)
     data_color = y
