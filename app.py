@@ -175,7 +175,7 @@ def iqindcentral(df, j1, pos):
 
 
     df['Press %']=df[df['Primary Position'] == 'Central']['Pressure Regains']/df[df['Primary Position'] == 'Central']['Pressures']
-    df['Éxito duelos aéreos']=df['Aerial Win%'].rank(pct=True)
+    df['Éxito duelos aéreos']=df[df['Primary Position'] == 'Central']['Aerial Win%'].rank(pct=True)
     df['Duelos aéreos ganados']=df['Aerial Wins'].rank(pct=True)
     df['Acciones agresivas']=df['Aggressive Actions'].rank(pct=True)
     df['Asistencias Torneo']=df['Assists'].rank(pct=True)
