@@ -314,8 +314,6 @@ def iqindcentral(df, j1, pos):
     ax1.text(0, y1, t3, size=txs1, c='black', fontweight='semibold')
 
     plot_bar_central(ax8, ['Presiones'], t3)
-
-    # Configuración para "Pases"
     plot_bar_central(ax6, ['Pases'], t2)
 
  
