@@ -313,6 +313,23 @@ def iqindcentral(df, j1, pos):
     ax1.grid(color='grey', axis='x', which='major', zorder=3)
     ax1.text(0, y1, t3, size=txs1, c='black', fontweight='semibold')
 
+    ax1=ax8
+    ax1.set_facecolor(c1)
+    ax1.set_xlim(-0.2,1.2)
+    ax1.set_xticklabels([])
+    ax1.yaxis.set_ticks_position('none') 
+    df1=df1.reindex(['Presiones'])
+    df1=df1.reindex(index=df1.index[::-1])
+    df1=df1.reset_index()
+    x=df1['index']
+    y=df1[j1]
+    z=y.values
+    norm = mp.colors.Normalize(vmin=0, vmax=1)
+    data_color = y
+    normmin=0
+    normmax=1
+    data_color = [(x-normmin) / (normmax-normmin) for x in data_color]
+
 
     plot_bar_central(ax1, bar1, ti1)
     plot_bar_central(ax2, bar2, ti2)
