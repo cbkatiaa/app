@@ -258,7 +258,6 @@ def iqindcentral(df, j1, pos):
     df['Pases largos por pases']=df['Long balls per pass'].rank(pct=True)
     df['% pases con zurdo']=df['L/R Footedness%']/100
 
-
     df = df.loc[df['Name'] == j1]
     df = df.set_index('Name').transpose()
 
@@ -319,7 +318,6 @@ def iqindcentral(df, j1, pos):
     plot_bar_central(ax3, bar3, ti3)
     plot_bar_central(ax4, bar4, ti4)
     plot_bar_central(ax5, bar5, ti5)
-
 
 
     j1 = j1.upper()
