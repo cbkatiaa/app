@@ -1219,7 +1219,7 @@ posicion_funciones = {
 "Central": iqindcentral,
 "Lateral": iqindlateral,
 "Contención": iqindcontencion,
-"Volante": iqindvolante,
+"Extremo": iqindvolante,
 "Mediapunta": iqindvolante,
 "Delantero": iqinddelantero
 }
