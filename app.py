@@ -260,6 +260,41 @@ def iqindcentral(df, j1, pos):
 
     df = df.loc[df['Name'] == j1]
     df = df.set_index('Name').transpose()
+    ax1=ax8
+    ax1.set_facecolor(c1)
+    ax1.set_xlim(-0.2,1.2)
+    ax1.set_xticklabels([])
+    ax1.yaxis.set_ticks_position('none') 
+    df1=df1.reindex(['Presiones'])
+    df1=df1.reindex(index=df1.index[::-1])
+    df1=df1.reset_index()
+    x=df1['index']
+    y=df1[j1]
+    z=y.values
+    norm = mp.colors.Normalize(vmin=0, vmax=1)
+    data_color = y
+    normmin=0
+    normmax=1
+    data_color = [(x-normmin) / (normmax-normmin) for x in data_color]
+
+    df1=df1.set_index('Name')
+    df1=df1.transpose()
+    ax1=ax6
+    ax1.set_facecolor(c1)
+    ax1.set_xlim(-0.2,1.2)
+    ax1.set_xticklabels([])
+    ax1.yaxis.set_ticks_position('none') 
+    df1=df1.reindex(['Pases'])
+    df1=df1.reindex(index=df1.index[::-1])
+    df1=df1.reset_index()
+    x=df1['index']
+    y=df1[j1]
+    z=y.values
+    norm = mp.colors.Normalize(vmin=0, vmax=1)
+    data_color = y
+    normmin=0
+    normmax=1
+    data_color = [(x-normmin) / (normmax-normmin) for x in data_color]
 
     ax0.axis('off')
     ax6.axis('off')
@@ -324,6 +359,8 @@ def iqindcentral(df, j1, pos):
     pos = pos.upper()
     plt.figtext(0.05, 0.98, j1, c='#151616', fontsize=56, fontweight='bold', fontname='arial')
     plt.figtext(0.05, 0.94, pos, c='#151616', fontsize=40, fontweight='bold', fontname='arial')
+
+    
 
 
     return fig
