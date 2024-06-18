@@ -772,9 +772,9 @@ def iqindvolante(df, j1, pos):
     sh=36
     ax0 = plt.subplot2grid(shape=(sh, 7), loc=(0, 0), colspan=4, rowspan=6)
     ax1 = plt.subplot2grid(shape=(sh, 7), loc=(6, 0), colspan=4, rowspan=6)
-    ax2 = plt.subplot2grid(shape=(sh, 7), loc=(13, 0), colspan=4, rowspan=5)
+    ax2 = plt.subplot2grid(shape=(sh, 7), loc=(12, 0), colspan=4, rowspan=5)
     ax3 = plt.subplot2grid(shape=(sh, 7), loc=(19, 0), colspan=4, rowspan=5)
-    ax4 = plt.subplot2grid(shape=(sh, 7), loc=(22, 0), colspan=4, rowspan=5)
+    ax4 = plt.subplot2grid(shape=(sh, 7), loc=(24, 0), colspan=4, rowspan=5)
     ax5 = plt.subplot2grid(shape=(sh, 7), loc=(30, 0), colspan=4, rowspan=5)
     ax6 = plt.subplot2grid(shape=(sh, 7), loc=(2, 4), colspan=3, rowspan=1)
     ax7 = plt.subplot2grid(shape=(sh, 7), loc=(3, 4), colspan=3, rowspan=12)
