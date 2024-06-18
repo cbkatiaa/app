@@ -130,8 +130,8 @@ def iqindcentral(df, j1, pos):
     ax3 = plt.subplot2grid(shape=(sh, 7), loc=(18, 0), colspan=4, rowspan=3)
     ax4 = plt.subplot2grid(shape=(sh, 7), loc=(21, 0), colspan=4, rowspan=9)
     ax5 = plt.subplot2grid(shape=(sh, 7), loc=(30, 0), colspan=4, rowspan=3)
-    ax6 = plt.subplot2grid(shape=(sh, 7), loc=(2, 4), colspan=3, rowspan=7)
-    ax7 = plt.subplot2grid(shape=(sh, 7), loc=(3, 4), colspan=3, rowspan=7)
+    ax6 = plt.subplot2grid(shape=(sh, 7), loc=(2, 4), colspan=4, rowspan=1)
+    ax7 = plt.subplot2grid(shape=(sh, 7), loc=(3, 4), colspan=4, rowspan=12)
     ax8 = plt.subplot2grid(shape=(sh, 7), loc=(18, 4), colspan=3, rowspan=1)
     ax9 = plt.subplot2grid(shape=(sh, 7), loc=(19, 4), colspan=3, rowspan=12)
     fig.subplots_adjust(left=0.1,
