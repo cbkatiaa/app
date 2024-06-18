@@ -314,8 +314,8 @@ def iqindcentral(df, j1, pos):
     ax1.grid(color='grey', axis='x', which='major', zorder=3)
     ax1.text(0, y1, t3, size=txs1, c='black', fontweight='semibold')
 
-    plot_bar_central(ax8, ['Presiones'], t3)
-    plot_bar_central(ax6, ['Pases'], t2)
+    plot_bar_central(ax6, ['Presiones'], t3)
+    plot_bar_central(ax7, ['Pases'], t2)
 
  
     plot_bar_central(ax1, bar1, ti1)
