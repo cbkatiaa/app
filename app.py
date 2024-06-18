@@ -345,9 +345,9 @@ def iqindlateral(df, j1, pos):
     ax3 = plt.subplot2grid(shape=(sh, 7), loc=(21, 0), colspan=4, rowspan=4)
     ax4 = plt.subplot2grid(shape=(sh, 7), loc=(25, 0), colspan=4, rowspan=5)
     ax5 = plt.subplot2grid(shape=(sh, 7), loc=(30, 0), colspan=4, rowspan=5)
-    ax6 = plt.subplot2grid(shape=(sh, 7), loc=(3, 4), colspan=4, rowspan=3)
+    ax6 = plt.subplot2grid(shape=(sh, 7), loc=(6, 4), colspan=4, rowspan=2)
     ax7 = plt.subplot2grid(shape=(sh, 7), loc=(3, 4), colspan=3, rowspan=12)
-    ax8 = plt.subplot2grid(shape=(sh, 7), loc=(19, 4), colspan=4, rowspan=3)
+    ax8 = plt.subplot2grid(shape=(sh, 7), loc=(22, 4), colspan=4, rowspan=2)
     ax9 = plt.subplot2grid(shape=(sh, 7), loc=(19, 4), colspan=3, rowspan=12)
     fig.subplots_adjust(left=0.1,
                         bottom=0.1,
