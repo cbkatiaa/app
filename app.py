@@ -557,7 +557,7 @@ def iqindcontencion(df, j1, pos):
     ax0 = plt.subplot2grid(shape=(sh, 7), loc=(0, 0), colspan=4, rowspan=6)
     ax1 = plt.subplot2grid(shape=(sh, 7), loc=(6, 0), colspan=4, rowspan=8)
     ax2 = plt.subplot2grid(shape=(sh, 7), loc=(13, 0), colspan=4, rowspan=7)
-    ax3 = plt.subplot2grid(shape=(sh, 7), loc=(19, 0), colspan=4, rowspan=3)
+    ax3 = plt.subplot2grid(shape=(sh, 7), loc=(20, 0), colspan=4, rowspan=3)
     ax4 = plt.subplot2grid(shape=(sh, 7), loc=(24, 0), colspan=4, rowspan=6)
     ax5 = plt.subplot2grid(shape=(sh, 7), loc=(30, 0), colspan=4, rowspan=6)
     ax6 = plt.subplot2grid(shape=(sh, 7), loc=(2, 4), colspan=3, rowspan=1)
