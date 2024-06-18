@@ -984,17 +984,17 @@ def iqinddelantero(df, j1, pos):
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
     fig.set_figwidth(31)
-    sh=36
+    sh=35
     ax0 = plt.subplot2grid(shape=(sh, 7), loc=(0, 0), colspan=4, rowspan=6)
     ax1 = plt.subplot2grid(shape=(sh, 7), loc=(6, 0), colspan=4, rowspan=9)
-    ax2 = plt.subplot2grid(shape=(sh, 7), loc=(15, 0), colspan=4, rowspan=3)
-    ax3 = plt.subplot2grid(shape=(sh, 7), loc=(18, 0), colspan=4, rowspan=3)
-    ax4 = plt.subplot2grid(shape=(sh, 7), loc=(21, 0), colspan=4, rowspan=9)
-    ax5 = plt.subplot2grid(shape=(sh, 7), loc=(30, 0), colspan=4, rowspan=3)
+    ax2 = plt.subplot2grid(shape=(sh, 7), loc=(15, 0), colspan=4, rowspan=6)
+    ax3 = plt.subplot2grid(shape=(sh, 7), loc=(21, 0), colspan=4, rowspan=7)
+    ax4 = plt.subplot2grid(shape=(sh, 7), loc=(28, 0), colspan=4, rowspan=3)
+    ax5 = plt.subplot2grid(shape=(sh, 7), loc=(31, 0), colspan=4, rowspan=4)
     ax6 = plt.subplot2grid(shape=(sh, 7), loc=(2, 4), colspan=3, rowspan=1)
-    ax7 = plt.subplot2grid(shape=(sh, 7), loc=(3, 4), colspan=3, rowspan=12)
-    ax8 = plt.subplot2grid(shape=(sh, 7), loc=(18, 4), colspan=3, rowspan=1)
-    ax9 = plt.subplot2grid(shape=(sh, 7), loc=(19, 4), colspan=3, rowspan=12)
+    ax7 = plt.subplot2grid(shape=(sh, 7), loc=(3, 4), colspan=3, rowspan=13)
+    ax8 = plt.subplot2grid(shape=(sh, 7), loc=(19, 4), colspan=3, rowspan=1)
+    ax9 = plt.subplot2grid(shape=(sh, 7), loc=(20, 4), colspan=3, rowspan=13)
     fig.subplots_adjust(left=0.1,
                         bottom=0.1,
                         right=0.9,
