@@ -29,19 +29,20 @@ def iqindportero(df, j1, pos):
     ax2 = plt.subplot2grid(shape=(sh, 7), loc=(8, 0), colspan=4, rowspan=8)
     ax6 = plt.subplot2grid(shape=(sh, 7), loc=(0, 4), colspan=3, rowspan=7)
     ax7 = plt.subplot2grid(shape=(sh, 7), loc=(9, 4), colspan=3, rowspan=7)
+    ax8 = plt.subplot2grid(shape=(sh, 7), loc=(5, 0), colspan=5, rowspan=4)
     fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.05, hspace=0.3)
 
     try:
-        # Obtén el enlace directo de la imagen desde la columna 'Image key'
+        
         img_url = df.loc[df['Name'] == j1, 'Image key'].iloc[0]
         
         # Verifica que img_url no esté vacío
         if img_url:
             st.text(f"Intentando cargar imagen desde: {img_url}")
             response = requests.get(img_url)
-            response.raise_for_status()  # Lanza una excepción si la petición no fue exitosa
+            response.raise_for_status()  
             img = mpimg.imread(BytesIO(response.content), format='png')
-            ax0.imshow(img)  # Mostrar la imagen en el área designada
+            ax8.imshow(img)  
             st.text(f"Imagen cargada exitosamente para {j1}")
         else:
             st.error(f"No se encontró una imagen para {j1}")
