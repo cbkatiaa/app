@@ -367,7 +367,7 @@ def iqindcentral(df, j1, pos):
     
     return fig
 
-def iqindlateral(df, j1, pos):
+def iqindlateral(df, j1, equipo, pos):
     c='white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
@@ -582,7 +582,7 @@ def iqindlateral(df, j1, pos):
 
     return fig
 
-def iqindcontencion(df, j1, pos):
+def iqindcontencion(df, j1, equipo, pos):
     c='white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
@@ -798,7 +798,7 @@ def iqindcontencion(df, j1, pos):
     return fig
 
 
-def iqindvolante(df, j1, pos):
+def iqindvolante(df, j1, equipo, pos):
     c='white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
@@ -1013,7 +1013,7 @@ def iqindvolante(df, j1, pos):
 
     return fig
 
-def iqinddelantero(df, j1, pos):
+def iqinddelantero(df, j1, equipo, pos):
     c='white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
