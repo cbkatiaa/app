@@ -45,15 +45,6 @@ def iqindportero(df, j1, pos):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
-    img_url = df.loc[df['Name'] == j1, 'Image key'].iloc[0]  # Obtener el enlace directo desde la base de datos
-    if img_url:
-        response = requests.get(img_url)
-        img = mpimg.imread(BytesIO(response.content))
-        ax0.imshow(img)
-    else:
-        st.error(f"No se encontró una imagen para {j1}")
-
-    ax0.axis('off')
 
     df['Long balls total']=(df['Long Balls']/df['Long Ball%'])*100
     df['Long balls per pass']=df['Long balls total']/df['OP Passes']
@@ -126,6 +117,16 @@ def iqindportero(df, j1, pos):
     pos = pos.upper()
     plt.figtext(0.05, 0.98, j1, c='#151616', fontsize=56, fontweight='bold', fontname='arial')
     plt.figtext(0.05, 0.94, pos, c='#151616', fontsize=40, fontweight='bold', fontname='arial')
+
+    img_url = df.loc[df['Name'] == j1, 'Image key'].iloc[0]  # Obtener el enlace directo desde la base de datos
+    if img_url:
+        response = requests.get(img_url)
+        img = mpimg.imread(BytesIO(response.content))
+        ax0.imshow(img)
+    else:
+        st.error(f"No se encontró una imagen para {j1}")
+
+    ax0.axis('off')
 
     return fig
 
