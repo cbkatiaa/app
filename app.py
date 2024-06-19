@@ -31,7 +31,7 @@ def iqindportero(df, j1, pos):
     ax7 = plt.subplot2grid(shape=(sh, 7), loc=(9, 4), colspan=3, rowspan=7)
     #ax8 = plt.subplot2grid(shape=(sh, 4), loc=(0, 0), colspan=6, rowspan=5)
     ax1_position = ax1.get_position()
-    ax8 = fig.add_axes([ax6.get_position().x0, ax1_position.y0, ax6.get_position().width * 2, ax1_position.height * 5])
+    ax8 = fig.add_axes([ax6.get_position().x0, ax1_position.y0, ax6.get_position().width * 2, ax1_position.height * 1])
     fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.05, hspace=0.3)
 
     try:
