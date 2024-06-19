@@ -1271,6 +1271,11 @@ jugadores = df_filtrado['Name'].unique()
 jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
 equipos_jugador = df_filtrado[df_filtrado['Name'] == jugador_seleccionado]['Team'].unique()
+equipo_seleccionado = None
+if len(equipos_jugador) > 1:
+    equipo_seleccionado = st.selectbox("Seleccione el equipo", equipos_jugador)
+else:
+    equipo_seleccionado = equipos_jugador[0]
 
 posicion_funciones = {
 "Portero": iqindportero,
