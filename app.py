@@ -42,12 +42,12 @@ def iqindportero(df, j1, pos):
         
         # Verifica que img_url no esté vacío
         if img_url:
-            st.text(f"Intentando cargar imagen desde: {img_url}")
+            #st.text(f"Intentando cargar imagen desde: {img_url}")
             response = requests.get(img_url)
             response.raise_for_status()  
             img = mpimg.imread(BytesIO(response.content), format='png')
             ax8.imshow(img)  
-            st.text(f"Imagen cargada exitosamente para {j1}")
+            #st.text(f"Imagen cargada exitosamente para {j1}")
         else:
             st.error(f"No se encontró una imagen para {j1}")
     except Exception as e:
