@@ -1332,3 +1332,4 @@ if st.button("Generar Análisis"):
         st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
 
 
+
