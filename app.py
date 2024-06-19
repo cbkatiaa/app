@@ -11,6 +11,8 @@ import os
 #from google.colab import drive
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 
 def iqindportero(df, j1, pos):
     c = 'white'
