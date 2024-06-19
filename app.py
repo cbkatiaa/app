@@ -89,7 +89,8 @@ def iqindportero(df, j1, pos):
     df['% pases con zurdo']=df['L/R Footedness%']/100
 
 
-    dff=df.loc[df['Name']==j1]
+    #dff=df.loc[df['Name']==j1]
+    dff = df[(df['Name'] == j1) & (df['Team'] == equipo)]
     df=df.set_index('Name')
     df=df.transpose()
 
@@ -1304,7 +1305,7 @@ posicion_funciones = {
 if st.button("Generar Análisis"):
     st.write(f"Generando análisis para: {jugador_seleccionado}, Equipo: {equipo_seleccionado}, Posición: {posicion_seleccionada}")
 
-    funcion_grafico = posicion_funciones.get(posicion_seleccionada)
+    funcion_grafico = iqindportero  # Ajustar según la función correspondiente a la posición
     
     if funcion_grafico:
         # Filtramos los datos de la posición completa para el cálculo de percentiles
@@ -1324,7 +1325,7 @@ if st.button("Generar Análisis"):
                 st.dataframe(df_jugador)
                 
                 try:
-                    fig = funcion_grafico(df_posicion, jugador_seleccionado, posicion_seleccionada)
+                    fig = funcion_grafico(df_posicion, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
                     st.pyplot(fig)
                 except Exception as e:
                     st.error(f"Error al generar el gráfico: {e}")
