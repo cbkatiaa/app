@@ -29,7 +29,7 @@ def iqindportero(df, j1, pos):
     ax2 = plt.subplot2grid(shape=(sh, 7), loc=(8, 0), colspan=4, rowspan=8)
     ax6 = plt.subplot2grid(shape=(sh, 7), loc=(0, 4), colspan=3, rowspan=7)
     ax7 = plt.subplot2grid(shape=(sh, 7), loc=(9, 4), colspan=3, rowspan=7)
-    ax8 = plt.subplot2grid(shape=(sh, 7), loc=(7, 0), colspan=0, rowspan=4)
+    ax8 = plt.subplot2grid(shape=(sh, 7), loc=(7, 0), colspan=5, rowspan=4)
     fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.05, hspace=0.3)
 
     try:
