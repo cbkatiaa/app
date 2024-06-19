@@ -1308,7 +1308,8 @@ if st.button("Generar Análisis"):
     st.write(f"Generando análisis para: {jugador_seleccionado}, Equipo: {equipo_seleccionado}, Posición: {posicion_seleccionada}")
 
     # Lógica para obtener la función de gráfico según la posición seleccionada
-    funcion_grafico = iqindportero  # Ajustar según la función correspondiente a la posición
+    #funcion_grafico = iqindportero  # Ajustar según la función correspondiente a la posición
+    funcion_grafico = posicion_funciones.get(posicion_seleccionada)
     
     if funcion_grafico:
         # Filtramos los datos de la posición completa para el cálculo de percentiles
