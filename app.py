@@ -73,28 +73,26 @@ def iqindportero(df, j1, equipo, pos):
     plt.rcParams["font.family"] = "Century Gothic"
 
 
-    try:
-        df['Long balls total'] = (df['Long Balls'] / df['Long Ball%']) * 100
-        df['Long balls per pass'] = df['Long balls total'] / df['OP Passes']
-        df['% pases son largos'] = df['Long balls per pass'].rank(pct=True)
-        df['Goles parados'] = df['GSAA'].rank(pct=True)
-        df['OBV portero'] = df['Goalkeeper OBV'].rank(pct=True)
-        df['Salidas de libero del portero'] = df['GK Aggressive Dist.'].rank(pct=True)
-        df['Salidas de portero (centros)'] = df['Claims%'].rank(pct=True)
-        df['Pases hacia peligro %'] = df['Pass into Danger%'].rank(pct=True)
-        df['Calidad de posicionamiento'] = 1 - (df['Positioning Error'].rank(pct=True))
-        df['Pases'] = df['OP Passes'].rank(pct=True)
-        df['Éxito pases largos'] = df['Long Ball%'].rank(pct=True)
-        df['Éxito pases'] = df['Passing%'].rank(pct=True)
-        df['Éxito pases bajo presión'] = df['Pr. Pass%'].rank(pct=True)
-        df['% pases con zurdo'] = df['L/R Footedness%'] / 100
-    except Exception as e:
-        st.error(f"Error en cálculo de percentiles: {e}")
-        st.text(f"Datos de cálculo: {df}")
+   
+    df['Long balls total'] = (df['Long Balls'] / df['Long Ball%']) * 100
+    df['Long balls per pass'] = df['Long balls total'] / df['OP Passes']
+    df['% pases son largos'] = df['Long balls per pass'].rank(pct=True)
+    df['Goles parados'] = df['GSAA'].rank(pct=True)
+    df['OBV portero'] = df['Goalkeeper OBV'].rank(pct=True)
+    df['Salidas de libero del portero'] = df['GK Aggressive Dist.'].rank(pct=True)
+    df['Salidas de portero (centros)'] = df['Claims%'].rank(pct=True)
+    df['Pases hacia peligro %'] = df['Pass into Danger%'].rank(pct=True)
+    df['Calidad de posicionamiento'] = 1 - (df['Positioning Error'].rank(pct=True))
+    df['Pases'] = df['OP Passes'].rank(pct=True)
+    df['Éxito pases largos'] = df['Long Ball%'].rank(pct=True)
+    df['Éxito pases'] = df['Passing%'].rank(pct=True)
+    df['Éxito pases bajo presión'] = df['Pr. Pass%'].rank(pct=True)
+    df['% pases con zurdo'] = df['L/R Footedness%'] / 100
+    
 
 
-    #dff=df.loc[df['Name']==j1]
-    dff = df[(df['Name'] == j1) & (df['Team'] == equipo)]
+    dff=df.loc[df['Name']==j1]
+    #dff = df[(df['Name'] == j1) & (df['Team'] == equipo)]
     df=df.set_index('Name')
     df=df.transpose()
 
@@ -1309,6 +1307,7 @@ posicion_funciones = {
 if st.button("Generar Análisis"):
     st.write(f"Generando análisis para: {jugador_seleccionado}, Equipo: {equipo_seleccionado}, Posición: {posicion_seleccionada}")
 
+    # Lógica para obtener la función de gráfico según la posición seleccionada
     funcion_grafico = iqindportero  # Ajustar según la función correspondiente a la posición
     
     if funcion_grafico:
