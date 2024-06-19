@@ -43,6 +43,13 @@ def iqindportero(df, j1, pos):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
+    img_folder_url = 'https://drive.google.com/drive/folders/1FfrA3auhOfYNZTzAVxcVdRS_lRXTsIbi?usp=sharing'
+    img_filename = df.loc[df['Name'] == j1, 'ImageFilename'].values[0]  # Obtener el nombre de archivo de imagen del DataFrame
+    img_url = f'{img_folder_url}/{img_filename}'  # URL completa a la imagen específica del portero
+    img = mpimg.imread(img_url)
+    ax0.imshow(img)
+    ax0.axis('off')
+
     df['Long balls total']=(df['Long Balls']/df['Long Ball%'])*100
     df['Long balls per pass']=df['Long balls total']/df['OP Passes']
     df['% pases son largos']=df['Long balls per pass'].rank(pct=True)
