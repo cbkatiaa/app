@@ -1270,6 +1270,8 @@ df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Positio
 jugadores = df_filtrado['Name'].unique()
 jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
+equipos_jugador = df_filtrado[df_filtrado['Name'] == jugador_seleccionado]['Team'].unique()
+
 posicion_funciones = {
 "Portero": iqindportero,
 "Central": iqindcentral,
