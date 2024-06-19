@@ -14,6 +14,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 #from pydrive.auth import GoogleAuth
 #from pydrive.drive import GoogleDrive
 import requests
+from io import BytesIO
+
 
 
 def iqindportero(df, j1, pos):
