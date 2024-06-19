@@ -1307,21 +1307,27 @@ if st.button("Generar Análisis"):
     funcion_grafico = posicion_funciones.get(posicion_seleccionada)
     
     if funcion_grafico:
-        # Filtramos por el equipo seleccionado también
-        df_jugador = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)]
+        # Filtramos los datos de la posición completa para el cálculo de percentiles
+        df_posicion = df[df['Primary Position'] == posicion_seleccionada]
         
-        # Verificar que df_jugador no esté vacío
-        if df_jugador.empty:
-            st.error("No se encontraron datos para el jugador y equipo seleccionados.")
+        # Verificar que df_posicion no esté vacío
+        if df_posicion.empty:
+            st.error("No se encontraron datos para la posición seleccionada.")
         else:
-            st.write("Datos del jugador seleccionados:")
-            st.dataframe(df_jugador)
+            # Filtramos los datos específicos del jugador y equipo seleccionado
+            df_jugador = df_posicion[(df_posicion['Name'] == jugador_seleccionado) & (df_posicion['Team'] == equipo_seleccionado)]
             
-            try:
-                fig = funcion_grafico(df_jugador, jugador_seleccionado, posicion_seleccionada)
-                st.pyplot(fig)
-            except Exception as e:
-                st.error(f"Error al generar el gráfico: {e}")
+            if df_jugador.empty:
+                st.error("No se encontraron datos para el jugador y equipo seleccionados.")
+            else:
+                st.write("Datos del jugador seleccionados:")
+                st.dataframe(df_jugador)
+                
+                try:
+                    fig = funcion_grafico(df_posicion, jugador_seleccionado, posicion_seleccionada)
+                    st.pyplot(fig)
+                except Exception as e:
+                    st.error(f"Error al generar el gráfico: {e}")
     else:
         st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
 
