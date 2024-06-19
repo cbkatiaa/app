@@ -11,8 +11,8 @@ import os
 #from google.colab import drive
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
+#from pydrive.auth import GoogleAuth
+#from pydrive.drive import GoogleDrive
 
 def iqindportero(df, j1, pos):
     c = 'white'
@@ -45,11 +45,14 @@ def iqindportero(df, j1, pos):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
-    img_folder_url = 'https://drive.google.com/drive/folders/1FfrA3auhOfYNZTzAVxcVdRS_lRXTsIbi?usp=sharing'
-    img_filename = df.loc[df['Name'] == j1, 'ImageFilename'].values[0]  # Obtener el nombre de archivo de imagen del DataFrame
-    img_url = f'{img_folder_url}/{img_filename}'  # URL completa a la imagen específica del portero
-    img = mpimg.imread(img_url)
-    ax0.imshow(img)
+    img_url = df.loc[df['Name'] == j1, 'Image key'].iloc[0]  # Obtener el enlace directo desde la base de datos
+    if img_url:
+        response = requests.get(img_url)
+        img = mpimg.imread(BytesIO(response.content))
+        ax0.imshow(img)
+    else:
+        st.error(f"No se encontró una imagen para {j1}")
+
     ax0.axis('off')
 
     df['Long balls total']=(df['Long Balls']/df['Long Ball%'])*100
