@@ -31,6 +31,24 @@ def iqindportero(df, j1, pos):
     ax7 = plt.subplot2grid(shape=(sh, 7), loc=(9, 4), colspan=3, rowspan=7)
     fig.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.05, hspace=0.3)
 
+    try:
+        # Obtén el enlace directo de la imagen desde la columna 'Image key'
+        img_url = df.loc[df['Name'] == j1, 'Image key'].iloc[0]
+        
+        # Verifica que img_url no esté vacío
+        if img_url:
+            st.text(f"Intentando cargar imagen desde: {img_url}")
+            response = requests.get(img_url)
+            response.raise_for_status()  # Lanza una excepción si la petición no fue exitosa
+            img = mpimg.imread(BytesIO(response.content), format='png')
+            ax0.imshow(img)  # Mostrar la imagen en el área designada
+            st.text(f"Imagen cargada exitosamente para {j1}")
+        else:
+            st.error(f"No se encontró una imagen para {j1}")
+    except Exception as e:
+        st.error(f"Error al cargar la imagen para {j1}: {e}")
+        st.text(f"URL de la imagen: {img_url}")
+
     bar1 = ['Goles parados', 'Calidad de posicionamiento', 'Salidas de portero (centros)', 'Salidas de libero del portero']
     bar2 = ['Pases', '% pases con zurdo', 'Éxito pases', '% pases son largos', 'Éxito pases largos', 'Éxito pases bajo presión', 'Pases hacia peligro %']
 
@@ -122,15 +140,6 @@ def iqindportero(df, j1, pos):
     plt.figtext(0.05, 0.98, j1, c='#151616', fontsize=56, fontweight='bold', fontname='arial')
     plt.figtext(0.05, 0.94, pos, c='#151616', fontsize=40, fontweight='bold', fontname='arial')
 
-    img_url = df.loc[df['Name'] == j1, 'Image key'].iloc[0]  # Obtener el enlace directo desde la base de datos
-    if img_url:
-        response = requests.get(img_url)
-        img = mpimg.imread(BytesIO(response.content))
-        ax0.imshow(img)
-    else:
-        st.error(f"No se encontró una imagen para {j1}")
-
-    ax0.axis('off')
 
     return fig
 
