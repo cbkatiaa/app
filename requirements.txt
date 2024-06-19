@@ -8,5 +8,5 @@ gspread
 oauth2client
 PyDrive
 gdrive_link_maker
-request
+requests
 io
