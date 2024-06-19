@@ -74,20 +74,29 @@ def iqindportero(df, j1, equipo, pos):
 
 
    
-    df['Long balls total'] = (df['Long Balls'] / df['Long Ball%']) * 100
-    df['Long balls per pass'] = df['Long balls total'] / df['OP Passes']
-    df['% pases son largos'] = df['Long balls per pass'].rank(pct=True)
-    df['Goles parados'] = df['GSAA'].rank(pct=True)
-    df['OBV portero'] = df['Goalkeeper OBV'].rank(pct=True)
-    df['Salidas de libero del portero'] = df['GK Aggressive Dist.'].rank(pct=True)
-    df['Salidas de portero (centros)'] = df['Claims%'].rank(pct=True)
-    df['Pases hacia peligro %'] = df['Pass into Danger%'].rank(pct=True)
-    df['Calidad de posicionamiento'] = 1 - (df['Positioning Error'].rank(pct=True))
-    df['Pases'] = df['OP Passes'].rank(pct=True)
-    df['Éxito pases largos'] = df['Long Ball%'].rank(pct=True)
-    df['Éxito pases'] = df['Passing%'].rank(pct=True)
-    df['Éxito pases bajo presión'] = df['Pr. Pass%'].rank(pct=True)
-    df['% pases con zurdo'] = df['L/R Footedness%'] / 100
+    try:
+        # Filtrar el DataFrame por la posición del jugador seleccionado
+        df_posicion = df[df['Primary Position'] == pos]
+        
+        # Calcular percentiles
+        df_posicion['Long balls total'] = (df_posicion['Long Balls'] / df_posicion['Long Ball%']) * 100
+        df_posicion['Long balls per pass'] = df_posicion['Long balls total'] / df_posicion['OP Passes']
+        df_posicion['% pases son largos'] = df_posicion['Long balls per pass'].rank(pct=True)
+        df_posicion['Goles parados'] = df_posicion['GSAA'].rank(pct=True)
+        df_posicion['OBV portero'] = df_posicion['Goalkeeper OBV'].rank(pct=True)
+        df_posicion['Salidas de libero del portero'] = df_posicion['GK Aggressive Dist.'].rank(pct=True)
+        df_posicion['Salidas de portero (centros)'] = df_posicion['Claims%'].rank(pct=True)
+        df_posicion['Pases hacia peligro %'] = df_posicion['Pass into Danger%'].rank(pct=True)
+        df_posicion['Calidad de posicionamiento'] = 1 - df_posicion['Positioning Error'].rank(pct=True)
+        df_posicion['Pases'] = df_posicion['OP Passes'].rank(pct=True)
+        df_posicion['Éxito pases largos'] = df_posicion['Long Ball%'].rank(pct=True)
+        df_posicion['Éxito pases'] = df_posicion['Passing%'].rank(pct=True)
+        df_posicion['Éxito pases bajo presión'] = df_posicion['Pr. Pass%'].rank(pct=True)
+        df_posicion['% pases con zurdo'] = df_posicion['L/R Footedness%'] / 100
+    except Exception as e:
+        st.error(f"Error en cálculo de percentiles: {e}")
+        st.text(f"Datos de cálculo: {df}")
+
     
 
 
@@ -1312,26 +1321,10 @@ if st.button("Generar Análisis"):
     funcion_grafico = posicion_funciones.get(posicion_seleccionada)
     
     if funcion_grafico:
-        # Filtramos los datos de la posición completa para el cálculo de percentiles
-        df_posicion = df[df['Primary Position'] == posicion_seleccionada]
-        
-        # Verificar que df_posicion no esté vacío
-        if df_posicion.empty:
-            st.error("No se encontraron datos para la posición seleccionada.")
-        else:
-            # Filtramos los datos específicos del jugador y equipo seleccionado
-            df_jugador = df_posicion[(df_posicion['Name'] == jugador_seleccionado) & (df_posicion['Team'] == equipo_seleccionado)]
-            
-            if df_jugador.empty:
-                st.error("No se encontraron datos para el jugador y equipo seleccionados.")
-            else:
-                st.write("Datos del jugador seleccionados:")
-                st.dataframe(df_jugador)
-                
-                try:
-                    fig = funcion_grafico(df_posicion, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
-                    st.pyplot(fig)
-                except Exception as e:
-                    st.error(f"Error al generar el gráfico: {e}")
+        try:
+            fig = funcion_grafico(df_filtrado, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
+            st.pyplot(fig)
+        except Exception as e:
+            st.error(f"Error al generar el gráfico: {e}")
     else:
         st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
