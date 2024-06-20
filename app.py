@@ -1070,6 +1070,9 @@ def iqinddelantero(df, j1, equipo, pos):
     plt.rcParams["font.family"] = "Century Gothic"
 
     df_jugador_equipo = df[(df['Name'] == j1) & (df['Team'] == equipo)]
+    if df_jugador_equipo.empty:
+        st.error(f"No se encontraron datos para el jugador {j1} en el equipo {equipo}.")
+        return None
 
 
     df['Press %']=df['Pressure Regains']/df['Pressures']
