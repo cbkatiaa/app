@@ -74,28 +74,21 @@ def iqindportero(df, j1, equipo, pos):
 
 
    
-    try:
-        # Filtrar el DataFrame por la posición del jugador seleccionado
-        df_posicion = df[df['Primary Position'] == pos]
-        
-        # Calcular percentiles
-        df_posicion['Long balls total'] = (df_posicion['Long Balls'] / df_posicion['Long Ball%']) * 100
-        df_posicion['Long balls per pass'] = df_posicion['Long balls total'] / df_posicion['OP Passes']
-        df_posicion['% pases son largos'] = df_posicion['Long balls per pass'].rank(pct=True)
-        df_posicion['Goles parados'] = df_posicion['GSAA'].rank(pct=True)
-        df_posicion['OBV portero'] = df_posicion['Goalkeeper OBV'].rank(pct=True)
-        df_posicion['Salidas de libero del portero'] = df_posicion['GK Aggressive Dist.'].rank(pct=True)
-        df_posicion['Salidas de portero (centros)'] = df_posicion['Claims%'].rank(pct=True)
-        df_posicion['Pases hacia peligro %'] = df_posicion['Pass into Danger%'].rank(pct=True)
-        df_posicion['Calidad de posicionamiento'] = 1 - df_posicion['Positioning Error'].rank(pct=True)
-        df_posicion['Pases'] = df_posicion['OP Passes'].rank(pct=True)
-        df_posicion['Éxito pases largos'] = df_posicion['Long Ball%'].rank(pct=True)
-        df_posicion['Éxito pases'] = df_posicion['Passing%'].rank(pct=True)
-        df_posicion['Éxito pases bajo presión'] = df_posicion['Pr. Pass%'].rank(pct=True)
-        df_posicion['% pases con zurdo'] = df_posicion['L/R Footedness%'] / 100
-    except Exception as e:
-        st.error(f"Error en cálculo de percentiles: {e}")
-        st.text(f"Datos de cálculo: {df}")
+    df['Long balls total']=(df['Long Balls']/df['Long Ball%'])*100
+    df['Long balls per pass']=df['Long balls total']/df['OP Passes']
+    df['% pases son largos']=df['Long balls per pass'].rank(pct=True)
+    df['Goles parados']=df['GSAA'].rank(pct=True)
+    df['OBV portero']=df['Goalkeeper OBV'].rank(pct=True)
+    df['Salidas de libero del portero']=df['GK Aggressive Dist.'].rank(pct=True)
+    df['Salidas de portero (centros)']=df['Claims%'].rank(pct=True)
+    df['Pases hacia peligro %']=df['Pass into Danger%'].rank(pct=True)
+    df['Calidad de posicionamiento']=1-(df['Positioning Error'].rank(pct=True))
+    df['Pases']=df['OP Passes'].rank(pct=True)
+    df['Éxito pases largos']=df['Long Ball%'].rank(pct=True)
+    df['Éxito pases']=df['Passing%'].rank(pct=True)
+    df['Éxito pases bajo presión']=df['Pr. Pass%'].rank(pct=True)
+    df['% pases con zurdo']=df['L/R Footedness%']/100
+
 
     
 
