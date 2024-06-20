@@ -1326,7 +1326,10 @@ if st.button("Generar Análisis"):
             st.error("No se encontraron datos para la posición seleccionada.")
         else:
             # Filtramos los datos específicos del jugador y equipo seleccionado
-            df_jugador = df_posicion[(df_posicion['Name'] == jugador_seleccionado) & (df_posicion['Team'] == equipo_seleccionado)]
+            if equipo_seleccionado is not None:
+                df_jugador = df_posicion[(df_posicion['Name'] == jugador_seleccionado) & (df_posicion['Team'] == equipo_seleccionado)]
+            else:
+                df_jugador = df_posicion[df_posicion['Name'] == jugador_seleccionado]
             
             if df_jugador.empty:
                 st.error("No se encontraron datos para el jugador y equipo seleccionados.")
