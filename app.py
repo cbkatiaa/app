@@ -1317,7 +1317,7 @@ if st.button("Generar Análisis"):
     # Lógica para obtener la función de gráfico según la posición seleccionada
     funcion_grafico = posicion_funciones.get(posicion_seleccionada)
     
-     if funcion_grafico:
+    if funcion_grafico:
         # Filtramos los datos de la posición completa para el cálculo de percentiles
         df_posicion = df[df['Primary Position'] == posicion_seleccionada]
         
