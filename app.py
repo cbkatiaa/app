@@ -1069,7 +1069,7 @@ def iqinddelantero(df, j1, equipo, pos):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
-    df_jugador = df[(df['Name'] == j1) & (df['Team'] == equipo)]
+    df_jugador_equipo = df[(df['Name'] == j1) & (df['Team'] == equipo)]
 
 
     df['Press %']=df['Pressure Regains']/df['Pressures']
