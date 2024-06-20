@@ -1311,7 +1311,13 @@ posicion_funciones = {
 #jugadores = df_filtrado['Name'].unique()
 #jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
-if funcion_grafico:
+if st.button("Generar Análisis"):
+    st.write(f"Generando análisis para: {jugador_seleccionado}, Equipo: {equipo_seleccionado}, Posición: {posicion_seleccionada}")
+
+    # Lógica para obtener la función de gráfico según la posición seleccionada
+    funcion_grafico = posicion_funciones.get(posicion_seleccionada)
+    
+    if funcion_grafico:
         # Filtramos los datos de la posición completa para el cálculo de percentiles
         df_posicion = df[df['Primary Position'] == posicion_seleccionada]
         
@@ -1333,5 +1339,5 @@ if funcion_grafico:
                     st.pyplot(fig)
                 except Exception as e:
                     st.error(f"Error al generar el gráfico: {e}")
-        else:
-            st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
+    else:
+        st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
