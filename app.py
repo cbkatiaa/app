@@ -1311,18 +1311,27 @@ posicion_funciones = {
 #jugadores = df_filtrado['Name'].unique()
 #jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
 
-if st.button("Generar Análisis"):
-    st.write(f"Generando análisis para: {jugador_seleccionado}, Equipo: {equipo_seleccionado}, Posición: {posicion_seleccionada}")
-
-    # Lógica para obtener la función de gráfico según la posición seleccionada
-    #funcion_grafico = iqindportero  # Ajustar según la función correspondiente a la posición
-    funcion_grafico = posicion_funciones.get(posicion_seleccionada)
-    
-    if funcion_grafico:
-        try:
-            fig = funcion_grafico(df_filtrado, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
-            st.pyplot(fig)
-        except Exception as e:
-            st.error(f"Error al generar el gráfico: {e}")
+if funcion_grafico:
+        # Filtramos los datos de la posición completa para el cálculo de percentiles
+        df_posicion = df[df['Primary Position'] == posicion_seleccionada]
+        
+        # Verificar que df_posicion no esté vacío
+        if df_posicion.empty:
+            st.error("No se encontraron datos para la posición seleccionada.")
+        else:
+            # Filtramos los datos específicos del jugador y equipo seleccionado
+            df_jugador = df_posicion[(df_posicion['Name'] == jugador_seleccionado) & (df_posicion['Team'] == equipo_seleccionado)]
+            
+            if df_jugador.empty:
+                st.error("No se encontraron datos para el jugador y equipo seleccionados.")
+            else:
+                st.write("Datos del jugador seleccionados:")
+                st.dataframe(df_jugador)
+                
+                try:
+                    fig = funcion_grafico(df_posicion, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
+                    st.pyplot(fig)
+                except Exception as e:
+                    st.error(f"Error al generar el gráfico: {e}")
     else:
         st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
