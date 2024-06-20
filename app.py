@@ -1335,7 +1335,7 @@ if st.button("Generar Análisis"):
             
             try:
                 fig = funcion_grafico(df_filtrado, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
-                st.pyplot(fig)
+                st.pyplot(fig)  # Mostrar el gráfico generado
             except Exception as e:
                 st.error(f"Error al generar el gráfico: {e}")
     else:
