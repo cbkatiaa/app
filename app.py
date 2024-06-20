@@ -1333,5 +1333,5 @@ if funcion_grafico:
                     st.pyplot(fig)
                 except Exception as e:
                     st.error(f"Error al generar el gráfico: {e}")
-    else:
-        st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
+        else:
+            st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
