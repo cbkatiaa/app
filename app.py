@@ -1320,11 +1320,11 @@ posicion_funciones = {
 if st.button("Generar Análisis"):
     st.write(f"Generando análisis para: {jugador_seleccionado}, Equipo: {equipo_seleccionado}, Posición: {posicion_seleccionada}")
 
-    # Lógica para obtener la función de gráfico según la posición seleccionada
+    
     funcion_grafico = posicion_funciones.get(posicion_seleccionada)
     
     if funcion_grafico:
-        # Filtramos los datos específicos del jugador y equipo seleccionado
+        
         df_jugador = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)]
         
         if df_jugador.empty:
