@@ -1015,7 +1015,7 @@ def iqindvolante(df, j1, equipo, pos):
 
     return fig
 
-def iqinddelantero(df, j1, equipo_seleccionado, pos):
+def iqinddelantero(df, j1, equipo, pos):
     c='white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
@@ -1294,6 +1294,7 @@ equipos_jugador = df_filtrado[df_filtrado['Name'] == jugador_seleccionado]['Team
 equipo_seleccionado = None
 if len(equipos_jugador) > 1:
     equipo_seleccionado = st.selectbox("Seleccione el equipo", equipos_jugador)
+    equipo_seleccionado = equipo
 else:
     equipo_seleccionado = equipos_jugador[0]
 
