@@ -1334,8 +1334,7 @@ if st.button("Generar Análisis"):
             st.write("Datos del jugador seleccionados:")
             st.dataframe(df_jugador)
     
-            
-        try:
+            try:
                 fig = funcion_grafico(df_jugador_equipo, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
                 st.pyplot(fig)  # Mostrar el gráfico generado
             except Exception as e:
