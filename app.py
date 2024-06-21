@@ -1069,10 +1069,10 @@ def iqinddelantero(df, j1, equipo, pos):
 
     plt.rcParams["font.family"] = "Century Gothic"
 
-    df_jugador_equipo = df[(df['Name'] == j1) & (df['Team'] == equipo)]
-    if df_jugador_equipo.empty:
-        st.error(f"No se encontraron datos para el jugador {j1} en el equipo {equipo}.")
-        return None
+    #df_jugador_equipo = df[(df['Name'] == j1) & (df['Team'] == equipo)]
+    #if df_jugador_equipo.empty:
+     #   st.error(f"No se encontraron datos para el jugador {j1} en el equipo {equipo}.")
+      #  return None
 
 
     df['Press %']=df['Pressure Regains']/df['Pressures']
@@ -1174,11 +1174,11 @@ def iqinddelantero(df, j1, equipo, pos):
     df['Carry length total']=df['Carries']*df['Carry Length']
     df['Distancia conducciones']=df['Carry length total'].rank(pct=True)
 
-    df_jugador_equipo = df[(df['Name'] == j1) & (df['Team'] == equipo)]
+    #df_jugador_equipo = df[(df['Name'] == j1) & (df['Team'] == equipo)]
 
-    if df_jugador_equipo.empty:
-        st.error(f"No se encontraron datos para el jugador {j1} en el equipo {equipo}.")
-        return None
+    #if df_jugador_equipo.empty:
+     #   st.error(f"No se encontraron datos para el jugador {j1} en el equipo {equipo}.")
+      #  return None
 
 
     df = df.loc[df['Name'] == j1]
