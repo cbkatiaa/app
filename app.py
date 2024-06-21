@@ -1015,7 +1015,7 @@ def iqindvolante(df, j1, equipo, pos):
 
     return fig
 
-def iqinddelantero(df, j1, equipo, pos):
+def iqinddelantero(df, j1, equipo_seleccionado, pos):
     c='white'
     fig = plt.figure(frameon=False, edgecolor='#293A4A')
     fig.set_figheight(18)
