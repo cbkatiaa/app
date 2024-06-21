@@ -1326,8 +1326,7 @@ if st.button("Generar Análisis"):
     
     if funcion_grafico:
         
-        df_jugador = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado)]
-        # & (df_filtrado['Team'] == equipo_seleccionado)
+        df_jugador = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)]
         
         if df_jugador.empty:
             st.error("No se encontraron datos para el jugador y equipo seleccionados.")
