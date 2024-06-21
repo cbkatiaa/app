@@ -1074,9 +1074,6 @@ def iqinddelantero(df, j1, equipo, pos):
      #   st.error(f"No se encontraron datos para el jugador {j1} en el equipo {equipo}.")
       #  return None
 
-    if equipos_jugador > 1:
-        (df['Name'] == j1) & (df['Team'] == equipo_seleccionado)
-        return None
 
 
     df['Press %']=df['Pressure Regains']/df['Pressures']
@@ -1294,7 +1291,6 @@ equipos_jugador = df_filtrado[df_filtrado['Name'] == jugador_seleccionado]['Team
 equipo_seleccionado = None
 if len(equipos_jugador) > 1:
     equipo_seleccionado = st.selectbox("Seleccione el equipo", equipos_jugador)
-    equipo_seleccionado = equipo
 else:
     equipo_seleccionado = equipos_jugador[0]
 
