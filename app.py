@@ -1074,6 +1074,10 @@ def iqinddelantero(df, j1, equipo, pos):
      #   st.error(f"No se encontraron datos para el jugador {j1} en el equipo {equipo}.")
       #  return None
 
+    if equipos_jugador > 1:
+        (df['Name'] == j1) & (df['Team'] == equipo_seleccionado)
+        return None
+
 
     df['Press %']=df['Pressure Regains']/df['Pressures']
     df['Éxito duelos aéreos']=df['Aerial Win%'].rank(pct=True)
@@ -1336,7 +1340,7 @@ if st.button("Generar Análisis"):
     
             try:
                 fig = funcion_grafico(df_jugador_equipo, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
-                st.pyplot(fig)  # Mostrar el gráfico generado
+                st.pyplot(fig)  
             except Exception as e:
                 st.error(f"Error al generar el gráfico: {e}")
     else:
