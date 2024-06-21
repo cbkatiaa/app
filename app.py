@@ -1273,7 +1273,7 @@ file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 sheet = client.open_by_key(file_key).sheet1
 
 
-# Convierte los datos de la hoja de cálculo en un DataFrame
+
 df = pd.DataFrame(sheet.get_all_records())
 
 
@@ -1316,7 +1316,7 @@ posicion_funciones = {
     #else:
      #   st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
 
-# Filtrado de datos según la temporada y posición seleccionadas (& (df['Team'] == equipo_seleccionado))
+#  (& (df['Team'] == equipo_seleccionado))
 #df_filtrado = df[(df['Season'] == temporada_seleccionada) & (df['Primary Position'] == posicion_seleccionada)]
 #jugadores = df_filtrado['Name'].unique()
 #jugador_seleccionado = st.selectbox("Seleccione al jugador", jugadores)
