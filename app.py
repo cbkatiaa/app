@@ -1349,10 +1349,10 @@ if st.button("Generar Análisis"):
         else:
             fig = funcion_grafico(df_filtrado, jugador_seleccionado, None, posicion_seleccionada)  # Pasar None si solo hay un equipo
     
-    st.pyplot(fig)
+        st.pyplot(fig)
     
-except Exception as e:
-    st.error(f"Error al generar el gráfico: {e}")
+    except Exception as e:
+        st.error(f"Error al generar el gráfico: {e}")
     
     #st.pyplot(fig)
     #else:
