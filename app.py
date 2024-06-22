@@ -1336,10 +1336,19 @@ if st.button("Generar Análisis"):
             st.write("Datos del jugador seleccionados:")
             st.dataframe(df_jugador)
     
+            #try:
+             #   fig = funcion_grafico(df_filtrado, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
+              #  st.pyplot(fig)  
+            #except Exception as e:
+             #   st.error(f"Error al generar el gráfico: {e}")
             try:
-                fig = funcion_grafico(df_filtrado, df_jugador, equipo_seleccionado, posicion_seleccionada)
-                st.pyplot(fig)  
-            except Exception as e:
-                st.error(f"Error al generar el gráfico: {e}")
+    # Lógica para pasar df_filtrado completo si no se selecciona un equipo específico
+                if equipo_seleccionado is not None:
+                    df_filtrado_jugador_equipo = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)]
+                    fig = funcion_grafico(df_filtrado_jugador_equipo, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
+            else:
+                fig = funcion_grafico(df_filtrado, jugador_seleccionado, None, posicion_seleccionada)  # Pasar None si solo hay un equipo
+    
+    st.pyplot(fig)
     else:
         st.error(f"No hay una función de gráficos definida para la posición: {posicion_seleccionada}")
