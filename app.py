@@ -1294,10 +1294,7 @@ equipo_seleccionado = None
 #else:
  #   equipo_seleccionado = equipos_jugador[0]
 
-if len(df_jugador['Team'].unique()) > 1:
-    equipo_seleccionado = st.selectbox("Selecciona el equipo", df_jugador['Team'].unique())
-else:
-    equipo_seleccionado = df_jugador['Team'].values[0]
+
 
 posicion_funciones = {
 "Portero": iqindportero,
@@ -1332,6 +1329,11 @@ if st.button("Generar Análisis"):
     if funcion_grafico:
         
         df_jugador = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)]
+
+        if len(df_jugador['Team'].unique()) > 1:
+            equipo_seleccionado = st.selectbox("Selecciona el equipo", df_jugador['Team'].unique())
+        else:
+            equipo_seleccionado = df_jugador['Team'].values[0]
         
         if df_jugador.empty:
             st.error("No se encontraron datos para el jugador y equipo seleccionados.")
