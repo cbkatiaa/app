@@ -1328,10 +1328,7 @@ if st.button("Generar Análisis"):
     
     if funcion_grafico:
         
-        df_jugador = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado) & df_filtrado[(df_filtrado['Team'] == equipo_seleccionado)]]
-
-        if len(df_jugador) > 1 and equipo_seleccionado:
-            df_jugador = df_jugador[df_jugador['Team'] == equipo_seleccionado]
+        df_jugador = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)]
         
         if df_jugador.empty:
             st.error("No se encontraron datos para el jugador y equipo seleccionados.")
@@ -1340,7 +1337,7 @@ if st.button("Generar Análisis"):
             st.dataframe(df_jugador)
     
             try:
-                fig = funcion_grafico(df_filtrado, df_jugador, equipo_seleccionado, posicion_seleccionada)
+                fig = funcion_grafico(df_filtrado, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
                 st.pyplot(fig)  
             except Exception as e:
                 st.error(f"Error al generar el gráfico: {e}")
