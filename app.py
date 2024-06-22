@@ -1343,11 +1343,11 @@ if st.button("Generar Análisis"):
              #   st.error(f"Error al generar el gráfico: {e}")
     try:
     # Lógica para pasar df_filtrado completo si no se selecciona un equipo específico
-    if equipo_seleccionado is not None:
-        df_filtrado_jugador_equipo = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)]
-        fig = funcion_grafico(df_filtrado_jugador_equipo, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
-    else:
-        fig = funcion_grafico(df_filtrado, jugador_seleccionado, None, posicion_seleccionada)  # Pasar None si solo hay un equipo
+        if equipo_seleccionado is not None:
+            df_filtrado_jugador_equipo = df_filtrado[(df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)]
+            fig = funcion_grafico(df_filtrado_jugador_equipo, jugador_seleccionado, equipo_seleccionado, posicion_seleccionada)
+        else:
+            fig = funcion_grafico(df_filtrado, jugador_seleccionado, None, posicion_seleccionada)  # Pasar None si solo hay un equipo
     
     st.pyplot(fig)
     
