@@ -1292,7 +1292,7 @@ equipo_seleccionado = None
 #if len(equipos_jugador) > 1:
  #   equipo_seleccionado = st.selectbox("Seleccione el equipo", equipos_jugador)
 #else:
-    equipo_seleccionado = equipos_jugador[0]
+ #   equipo_seleccionado = equipos_jugador[0]
 
 if len(df_jugador['Team'].unique()) > 1:
     equipo_seleccionado = st.selectbox("Selecciona el equipo", df_jugador['Team'].unique())
