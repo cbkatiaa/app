@@ -1342,26 +1342,26 @@ if st.button("Generar Análisis"):
             #except Exception as e:
              #   st.error(f"Error al generar el gráfico: {e}")
     try:
-    if equipo_seleccionado is not None:
+        if equipo_seleccionado is not None:
         # Verificar que el jugador seleccionado y equipo seleccionado coincidan en el DataFrame df_filtrado
-        if any((df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)):
-            j1 = jugador_seleccionado
-            e1 = equipo_seleccionado
+            if any((df_filtrado['Name'] == jugador_seleccionado) & (df_filtrado['Team'] == equipo_seleccionado)):
+                j1 = jugador_seleccionado
+                e1 = equipo_seleccionado
+            else:
+                st.error(f"No se encontraron datos para el jugador seleccionado ({jugador_seleccionado}) y el equipo seleccionado ({equipo_seleccionado}) en la temporada y posición especificadas.")
+                st.stop()
         else:
-            st.error(f"No se encontraron datos para el jugador seleccionado ({jugador_seleccionado}) y el equipo seleccionado ({equipo_seleccionado}) en la temporada y posición especificadas.")
-            st.stop()
-    else:
-        j1 = jugador_seleccionado
-        e1 = None  # Pasar None si solo hay un equipo o no se seleccionó un equipo específico
+            j1 = jugador_seleccionado
+            e1 = None  # Pasar None si solo hay un equipo o no se seleccionó un equipo específico
     
-    st.write(f"Generando análisis para: {j1}, Equipo: {e1}, Posición: {posicion_seleccionada}")
+        st.write(f"Generando análisis para: {j1}, Equipo: {e1}, Posición: {posicion_seleccionada}")
     
     # Llamada a la función de gráfico con los parámetros adecuados
-    fig = funcion_grafico(df_filtrado, j1, e1, posicion_seleccionada)
-    st.pyplot(fig)
+        fig = funcion_grafico(df_filtrado, j1, e1, posicion_seleccionada)
+        st.pyplot(fig)
     
-except Exception as e:
-    st.error(f"Error al generar el gráfico: {e}")
+    except Exception as e:
+        st.error(f"Error al generar el gráfico: {e}")
     
     #st.pyplot(fig)
     #else:
