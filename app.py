@@ -1356,7 +1356,7 @@ if st.button("Generar Análisis"):
     
         st.write(f"Generando análisis para: {j1}, Equipo: {e1}, Posición: {posicion_seleccionada}")
     
-    # Llamada a la función de gráfico con los parámetros adecuados
+    
         fig = funcion_grafico(df_filtrado, j1, e1, posicion_seleccionada)
         st.pyplot(fig)
     
