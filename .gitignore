@@ -1,6 +1,6 @@
 # Ignorar el archivo .env
 .env
-
+.streamlit/secrets.toml
 # Ignorar otros archivos sensibles o específicos de la configuración
 __pycache__/
 *.pyc
