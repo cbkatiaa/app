@@ -11,6 +11,7 @@ import os
 #from google.colab import drive
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
 #from pydrive.auth import GoogleAuth
 #from pydrive.drive import GoogleDrive
 import requests
@@ -1274,6 +1275,13 @@ sheets_key = os.getenv('GOOGLE_SHEETS_KEY')
 
 # Convertir las credenciales JSON a un diccionario
 creds_dict = json.loads(creds_json)
+
+creds = Credentials.from_service_account_info(creds_dict, scopes=[
+    'https://spreadsheets.google.com/feeds',
+    'https://www.googleapis.com/auth/drive'
+])
+client = gspread.authorize(creds)
+
 
 
 #file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
