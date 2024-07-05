@@ -1267,32 +1267,20 @@ st.title('Análisis de Jugadores')
 #creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 #client = gspread.authorize(creds)
 
-# Cargar variables de entorno desde el archivo .env
-load_dotenv()
+conn = st.connection("gsheets", type=GSheetsConnection)
+df = conn.read()
 
-# Leer las credenciales desde las variables de entorno
-creds_json = os.getenv('GCP_CREDENTIALS')
-sheets_key = os.getenv('GOOGLE_SHEETS_KEY')
-
-# Convertir las credenciales JSON a un diccionario
-creds_dict = json.loads(creds_json)
-
-creds = Credentials.from_service_account_info(creds_dict, scopes=[
-    'https://spreadsheets.google.com/feeds',
-    'https://www.googleapis.com/auth/drive'
-])
-client = gspread.authorize(creds)
 
 
 
 #file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 
 
-sheet = client.open_by_key(sheets_key).sheet1
+#sheet = client.open_by_key(sheets_key).sheet1
 
 
 
-df = pd.DataFrame(sheet.get_all_records())
+#df = pd.DataFrame(sheet.get_all_records())
 
 
 temporadas = df['Season'].unique()
