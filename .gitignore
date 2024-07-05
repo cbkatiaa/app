@@ -1,0 +1,13 @@
+# Ignorar el archivo .env
+.env
+
+# Ignorar otros archivos sensibles o específicos de la configuración
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+
+# Ignorar configuraciones de entornos virtuales
+venv/
+env/
+.venv/
