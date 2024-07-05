@@ -18,6 +18,7 @@ import requests
 from io import BytesIO
 from dotenv import load_dotenv
 import json
+from streamlit_gsheets import GSheetsConnection
 
 
 
