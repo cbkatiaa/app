@@ -1259,15 +1259,25 @@ def iqinddelantero(df, j1, equipo, pos):
 
 st.title('Análisis de Jugadores')
 
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
-client = gspread.authorize(creds)
+#scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+#creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+#client = gspread.authorize(creds)
+
+# Cargar variables de entorno desde el archivo .env
+load_dotenv()
+
+# Leer las credenciales desde las variables de entorno
+creds_json = os.getenv('GCP_CREDENTIALS')
+sheets_key = os.getenv('GOOGLE_SHEETS_KEY')
+
+# Convertir las credenciales JSON a un diccionario
+creds_dict = json.loads(creds_json)
 
 
-file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
+#file_key = '13hOEzyecNB-3SdKE3qnIHKRPRWtkTqdz66VHEhqdtWA'
 
 
-sheet = client.open_by_key(file_key).sheet1
+sheet = client.open_by_key(sheets_key).sheet1
 
 
 
