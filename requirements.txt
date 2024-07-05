@@ -9,3 +9,4 @@ oauth2client
 PyDrive
 gdrive_link_maker
 requests
+python-dotenv
