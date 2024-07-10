@@ -1269,7 +1269,7 @@ st.title('Análisis de Jugadores')
 #conn = st.connection("gsheets", type=GSheetsConnection)
 #df = conn.read()
 
-df = pd.read(jugadores.csv)
+df = pd.read_csv(jugadores.csv)
 
 
 
