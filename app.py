@@ -1267,8 +1267,10 @@ st.title('Análisis de Jugadores')
 #creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 #client = gspread.authorize(creds)
 
-conn = st.connection("gsheets", type=GSheetsConnection)
-df = conn.read()
+#conn = st.connection("gsheets", type=GSheetsConnection)
+#df = conn.read()
+
+df = pd.read(jugadores.csv)
 
 
 
