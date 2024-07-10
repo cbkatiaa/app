@@ -1269,8 +1269,7 @@ st.title('Análisis de Jugadores')
 #conn = st.connection("gsheets", type=GSheetsConnection)
 #df = conn.read()
 
-url = 'https://raw.githubusercontent.com/cbkatiaa/app/main/Base de datos - Jugadores.xlsx'
-df = pd.read_excel(url)
+df = pd.read_excel(f'https://raw.githubusercontent.com/cbkatiaa/app/main/Base de datos - Jugadores.xlsx')
 
 
 
